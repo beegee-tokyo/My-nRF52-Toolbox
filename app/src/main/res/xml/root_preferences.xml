@@ -1,0 +1,42 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory
+        android:title="@string/uuid_filter_header"
+        app:icon="@mipmap/ic_uuid_filter">
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="uuid_filter"
+            android:summary="@string/settings_UUID_summary"
+            android:title="@string/settings_enable_UUID"
+            app:iconSpaceReserved="false" />
+
+        <EditTextPreference
+            android:dependency="uuid_filter"
+            android:key="uuid_filter_value"
+            android:title="@string/settings_UUID_text"
+            app:iconSpaceReserved="false" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/name_filter_header"
+        app:icon="@mipmap/ic_name_filter">
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="name_filter"
+            android:summary="@string/settings_name_summary"
+            android:title="@string/settings_enable_name"
+            app:iconSpaceReserved="false" />
+
+        <EditTextPreference
+            android:dependency="name_filter"
+            android:key="name_filter_value"
+            android:title="@string/settings_name_text"
+            app:iconSpaceReserved="false" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

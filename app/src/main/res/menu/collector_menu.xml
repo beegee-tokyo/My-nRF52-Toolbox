@@ -1,0 +1,11 @@
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" >
+
+    <item
+        android:id="@+id/connect"
+        android:orderInCategory="100"
+        android:title="@string/action_connect"
+        app:showAsAction="always|withText" />
+
+</menu>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_update"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_centerInParent="true"
+    android:background="@android:color/holo_red_light"
+    android:orientation="vertical"
+    android:visibility="gone"
+    tools:visibility="gone">
+
+    <TextView
+        android:id="@+id/tv_upd_stat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:ems="10"
+        android:gravity="center_horizontal"
+        android:text="@string/upd_status"
+        android:textAlignment="center"
+        android:textSize="24sp" />
+
+    <com.daimajia.numberprogressbar.NumberProgressBar
+        android:id="@+id/pb_upd_fw"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="25dp"
+        android:background="@android:color/black"
+        custom:progress_current="0"
+        custom:progress_max="100"
+
+        custom:progress_reached_bar_height="20dp"
+        custom:progress_reached_color="#00FF00"
+
+        custom:progress_text_color="#FFFFFF"
+        custom:progress_text_offset="2dp"
+        custom:progress_text_size="18sp"
+        custom:progress_text_visibility="visible"
+
+        custom:progress_unreached_bar_height="5dp"
+        custom:progress_unreached_color="#FF0000" />
+
+</LinearLayout>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2015, Nordic Semiconductor
+  ~ All rights reserved.
+  ~
+  ~ Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+  ~
+  ~ 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+  ~
+  ~ 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the
+  ~ documentation and/or other materials provided with the distribution.
+  ~
+  ~ 3. Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this
+  ~ software without specific prior written permission.
+  ~
+  ~ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+  ~ LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+  ~ HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+  ~ LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+  ~ ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE
+  ~ USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  -->
+<resources>
+
+	<string name="app_name">My-nRF52-Toolbox</string>
+	<string name="font_path">fonts/trebucbd.ttf</string>
+	<string name="normal_font_path">fonts/trebuc.ttf</string>
+
+	<string name="shortcut_dfu_short">DFU</string>
+	<string name="shortcut_dfu_long">Device Firmware Update</string>
+
+	<string name="ok">OK</string>
+	<string name="yes">Yes</string>
+	<string name="no">No</string>
+	<string name="cancel">Cancel</string>
+
+	<string name="action_about">About</string>
+	<string name="action_connect">CONNECT</string>
+	<string name="action_select">SELECT DEVICE</string>
+	<string name="action_connecting">CONNECTING…</string>
+	<string name="action_disconnect">DISCONNECT</string>
+	<string name="action_disconnecting">DISCONNECTING…</string>
+
+	<string name="drawer_plugins">PLUGINS</string>
+	<string name="drawer_plugin_nrf_connect">nRF Connect</string>
+
+	<string name="battery">%d%%</string>
+	<string name="not_available">n/a</string>
+	<string name="no_ble">Device doesn\'t have BLE support!</string>
+	<string name="no_apps">No profiles found.</string>
+	<string name="not_supported">The device does not have required services.</string>
+	<string name="no_required_permission">Permission denied.</string>
+	<string name="scanner_title">Select device:</string>
+	<string name="scanner_empty">No device found</string>
+	<string name="scanner_action_scan">Scan</string>
+	<string name="scanner_action_cancel">Cancel</string>
+	<string name="scanner_subtitle_bonded">BONDED DEVICES:</string>
+	<string name="scanner_subtitle_not_bonded">AVAILABLE DEVICES:</string>
+	<string name="scanner_permission_rationale">Since Android 6.0 Marshmallow system requires granting access to device\'s location in order to scan for Bluetooth Smart devices. Bluetooth beacons may be used to determine the phone\'s and user\'s location.</string>
+	<string name="scanner_default_name">NOT CONNECTED</string>
+
+	<string name="permission_title">Permission required</string>
+	<string name="about_title">About</string>
+	<string name="about_version">\n\nApp version: %s</string>
+	<string name="about_dfu_version">\nDFU lib version: %s</string>
+	<string name="about_text">This application enables connection to nRF52 modules, start a simple BLE UART connection or update the firmware\n\nApplication\n\u00A9 BeeGee 2020\nDFU library\n\u00A9 Nordic Semiconductor 2015</string>
+
+	<string name="menu_settings">Settings</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Preference Titles -->
+    <string name="uuid_filter_header">OTA DFU UUID filter settings</string>
+    <string name="name_filter_header">Device name filter settings</string>
+
+    <!-- UUID Filter Preferences -->
+	<string name="settings_enable_UUID">Custom OTA DFU UUID filter</string>
+	<string name="settings_UUID_text">Enter custom UUID as 4 digit HEX string</string>
+	<string name="settings_UUID_hint">1530</string>
+	<string name="settings_UUID_summary">Enable UUID filter for DFU application. If the filter is set, only devices that advertise this UUID will be shown</string>
+	<string name="settings_invalidUUID">You entered an invalid UUID!</string>
+
+    <!-- Name Filter Preferences -->
+	<string name="settings_enable_name">Device name filter</string>
+	<string name="settings_name_text">Enter first 2–4 letters of the device name</string>
+	<string name="settings_name_summary">Enable device name filter. If the filter is set, only devices that advertise a name beginning with this filter be shown</string>
+    <string name="sync_title">Sync email periodically</string>
+
+</resources>
