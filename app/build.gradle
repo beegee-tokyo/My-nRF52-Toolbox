@@ -21,6 +21,7 @@ android {
         versionNameSuffix 'beta'
         resConfigs "en"
         multiDexEnabled true
+        vectorDrawables.useSupportLibrary true
     }
     buildTypes {
         debug {

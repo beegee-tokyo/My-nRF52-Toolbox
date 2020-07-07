@@ -33,6 +33,7 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.ParcelUuid;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -269,7 +270,11 @@ public class ScannerFragment extends DialogFragment {
 		@Override
 		public void onScanResult(final int callbackType, final ScanResult result) {
 			// do nothing
-		}
+			String foundDevice = result.getDevice().getName();
+			if (foundDevice != null) {
+				Log.d("SCAN", "Found " + foundDevice);
+			}
+;		}
 
 		@Override
 		public void onBatchScanResults(final List<ScanResult> results) {

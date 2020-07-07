@@ -232,7 +232,6 @@ public class UARTService extends BleProfileService implements UARTManagerCallbac
 							break;
 					}
 					mManager.send(message);
-					return;
 				}
 			}
 			// No data od incompatible type of EXTRA_TEXT

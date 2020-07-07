@@ -83,6 +83,7 @@ public class UARTManager extends BleManager<UARTManagerCallbacks> {
 					mRXCharacteristic.setWriteType(BluetoothGattCharacteristic.WRITE_TYPE_DEFAULT);
 				else
 					mUseLongWrite = false;
+				send("\n");
 			}
 
 			return mRXCharacteristic != null && mTXCharacteristic != null && (writeRequest || writeCommand);

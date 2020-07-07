@@ -7,21 +7,20 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
-import android.widget.ScrollView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.widget.NestedScrollView;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.UUID;
 import java.util.regex.Pattern;
 
@@ -88,7 +87,7 @@ public class UARTActivity extends BleProfileServiceReadyActivity<UARTService.UAR
 	@Override
 	protected void onViewCreated(final Bundle savedInstanceState) {
 		getSupportActionBar().setDisplayShowTitleEnabled(false);
-		ScrollView sv = findViewById((R.id.sv_rcvdData));
+		NestedScrollView sv = findViewById((R.id.sv_rcvdData));
 		Handler handler = new Handler();
 		Runnable thisRun = () -> {
 			//Do something after 100ms
@@ -101,6 +100,17 @@ public class UARTActivity extends BleProfileServiceReadyActivity<UARTService.UAR
 				handler.removeCallbacks(thisRun);
 				handler.postDelayed(thisRun, 15000);
 			}
+		});
+		EditText sendText = findViewById(R.id.send_text);
+		View sendBtn = findViewById(R.id.send_btn);
+		sendBtn.setOnClickListener(v -> {
+			send(sendText.getText().toString());
+			sendText.getText().clear();
+		});
+		View clearButton = findViewById(R.id.clr_btn);
+		clearButton.setOnClickListener(v -> {
+			TextView logOut = findViewById(R.id.rcvd_lines);
+			logOut.setText("");
 		});
 	}
 
@@ -163,7 +173,7 @@ public class UARTActivity extends BleProfileServiceReadyActivity<UARTService.UAR
 	@Override
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
 		if (key.equals("uuid_filter") || key.equals("uuid_filter_value")) {
-			if (sharedPreferences.getBoolean("uuid_filter",true)) {
+			if (sharedPreferences.getBoolean("uuid_filter", true)) {
 				String newUuidFilter = sharedPreferences.getString(("uuid_filter_value"), "");
 				if (newUuidFilter.isEmpty()) {
 					return;
@@ -171,14 +181,14 @@ public class UARTActivity extends BleProfileServiceReadyActivity<UARTService.UAR
 				String tempUUID = sharedPreferences.getString(("uuid_filter_value"), "");
 				boolean valid128UUID = false;
 				boolean valid16UUID = false;
-				if(Pattern.matches("[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}", tempUUID)) {
+				if (Pattern.matches("[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}", tempUUID)) {
 					valid128UUID = true;
 				}
-				if(Pattern.matches("[a-fA-F0-9]{4}", tempUUID)) {
+				if (Pattern.matches("[a-fA-F0-9]{4}", tempUUID)) {
 					valid16UUID = true;
 				}
 				if (valid16UUID) {
-					tempUUID = "0000" + tempUUID +  "-0000-1000-8000-00805F9B34FB";
+					tempUUID = "0000" + tempUUID + "-0000-1000-8000-00805F9B34FB";
 				}
 				if (valid16UUID || valid128UUID) {
 					try {
@@ -194,7 +204,7 @@ public class UARTActivity extends BleProfileServiceReadyActivity<UARTService.UAR
 			return;
 		}
 		if (key.equals("name_filter") || key.equals("name_filter_value")) {
-			if (sharedPreferences.getBoolean("name_filter",true)) {
+			if (sharedPreferences.getBoolean("name_filter", true)) {
 				FeaturesActivity.devicePrefix = sharedPreferences.getString(("name_filter_value"), "");
 			} else {
 				reqUUID = null;
@@ -216,16 +226,27 @@ public class UARTActivity extends BleProfileServiceReadyActivity<UARTService.UAR
 //				rcvdRaw = intent.getByteArrayExtra(EXTRA_DATA);
 				String rcvd = intent.getStringExtra(EXTRA_DATA);
 				String rcvdRaw = "";
-				if (Character.isLetter(rcvd.charAt(0)) || Character.isDigit(rcvd.charAt(0))) {
+				boolean addNL = false;
+				if (((rcvd.charAt(0) >= 32) && (rcvd.charAt(0) < 127))
+						|| (rcvd.charAt(0) == 10)
+						|| (rcvd.charAt(0) == 13)) {
+//				}
+//				if (Character.isLetter(rcvd.charAt(0))
+//						|| Character.isDigit(rcvd.charAt(0))
+//						|| Character.isWhitespace(rcvd.charAt(0))
+//				|| ((rcvd.charAt(0) >= 32) && (rcvd.charAt(0)<127))) {
 					rcvd = intent.getStringExtra(EXTRA_DATA);
 				} else {
 					for (int idx = 0; idx < rcvd.length(); idx++) {
-						rcvdRaw = rcvdRaw + String.format("%02X ", (byte) rcvd.charAt(idx));
+						rcvdRaw = rcvdRaw + String.format("0x%02X", (byte) rcvd.charAt(idx));
+						addNL = true;
 					}
 					rcvd = rcvdRaw;
 				}
 				logOut.append(rcvd);
-				logOut.append("\n");
+				if (addNL) {
+					logOut.append("\n");
+				}
 				Log.d(TAG, "Received: " + rcvd);
 
 				// Check length of content and shorten it if there are more than 250 lines
@@ -240,7 +261,7 @@ public class UARTActivity extends BleProfileServiceReadyActivity<UARTService.UAR
 				}
 
 				if (!userScroll) {
-					ScrollView sv = findViewById(R.id.sv_rcvdData);
+					NestedScrollView sv = findViewById(R.id.sv_rcvdData);
 					sv.post(new Runnable() {
 						public void run() {
 							sv.fullScroll(View.FOCUS_DOWN);

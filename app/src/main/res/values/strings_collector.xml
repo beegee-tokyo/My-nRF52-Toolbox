@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="collector_feature_title">GATEWAY</string>
+    <string name="collector_feature_title">ESP32-WiFi</string>
 
     <string name="write_button">Send config</string>
     <string name="read_button">Get config</string>

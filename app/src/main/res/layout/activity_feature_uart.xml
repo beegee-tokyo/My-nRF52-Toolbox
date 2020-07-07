@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
     android:layout_width="match_parent"
@@ -11,16 +12,17 @@
         android:id="@+id/toolbar_actionbar"
         layout="@layout/toolbar" />
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:id="@+id/sv_rcvdData"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/device_name"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/inputs"
         android:layout_below="@id/toolbar_actionbar"
         android:layout_alignParentTop="false"
-        android:layout_centerHorizontal="true">
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp">
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/rcvd_lines"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -30,33 +32,74 @@
             android:layout_marginBottom="10dp"
             android:ems="10" />
 
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
-    <TextView
-        android:id="@+id/device_name"
-        android:layout_width="wrap_content"
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/inputs"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/action_connect"
-        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/controls"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:ems="10"
-        android:textSize="18sp" />
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/action_connect"
-        style="@style/Widget.Connect"
-        android:layout_width="wrap_content"
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/send_text"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:autofillHints="@string/uart_action_send"
+            android:inputType="text|textCapSentences|textAutoComplete|textImeMultiLine"
+            android:singleLine="false"
+            tools:ignore="LabelFor"
+            tools:targetApi="o" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/send_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight=".1"
+            android:background="@android:drawable/btn_default"
+            android:contentDescription="@android:string/ok"
+            app:srcCompat="@drawable/ic_send_white_24dp" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/controls"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/spacer"
-        android:layout_centerHorizontal="true"
-        android:onClick="onConnectClicked"
-        android:text="@string/action_connect" />
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
 
-    <View
-        android:id="@+id/spacer"
-        android:layout_width="wrap_content"
-        android:layout_height="32dp"
-        android:layout_alignParentBottom="true" />
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/clr_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@android:drawable/btn_default"
+            android:contentDescription="@android:string/ok"
+            app:srcCompat="@android:drawable/ic_menu_delete" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/action_connect"
+            style="@style/Widget.Connect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onConnectClicked"
+            android:text="@string/action_connect" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/device_name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:ems="8"
+            android:gravity="center_vertical|end"
+            android:text="@string/dfu_default_name"
+            android:textSize="12sp" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 </RelativeLayout>
