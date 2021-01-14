@@ -27,6 +27,8 @@ public class UARTService extends BleProfileService implements UARTManagerCallbac
 	public static final String BROADCAST_UART_RX = "no.nordicsemi.android.nrftoolbox.uart.BROADCAST_UART_RX";
 	public static final String EXTRA_DATA = "no.nordicsemi.android.nrftoolbox.uart.EXTRA_DATA";
 
+	public static final String SETTINGS_CLOSE = "no.nordicsemi.android.nrftoolbox.uart.SETTINGS_CLOSE";
+
 	/** A broadcast message with this action and the message in {@link Intent#EXTRA_TEXT} will be sent t the UART device. */
 	public final static String ACTION_SEND = "no.nordicsemi.android.nrftoolbox.uart.ACTION_SEND";
 	/** A broadcast message with this action is triggered when a message is received from the UART device. */

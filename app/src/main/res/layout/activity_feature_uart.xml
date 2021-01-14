@@ -12,33 +12,142 @@
         android:id="@+id/toolbar_actionbar"
         layout="@layout/toolbar" />
 
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/sv_rcvdData"
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/top_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_above="@+id/inputs"
         android:layout_below="@id/toolbar_actionbar"
-        android:layout_alignParentTop="false"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="10dp">
+       android:orientation="horizontal">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/rcvd_lines"
-            android:layout_width="match_parent"
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/sv_rcvdData"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="30dp"
+            android:layout_weight="8">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/rcvd_lines"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:ems="10" />
+
+        </androidx.core.widget.NestedScrollView>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/bt_row2"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="15dp"
-            android:layout_marginBottom="10dp"
-            android:ems="10" />
+            android:layout_above="@+id/controls"
+            android:layout_weight="2"
+            android:orientation="vertical">
 
-    </androidx.core.widget.NestedScrollView>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/bt0"
+                style="@style/Widget.MyButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="1dp"
+                android:layout_weight="1"
+                android:text="@string/bt0_name" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/bt1"
+                style="@style/Widget.MyButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="1dp"
+                android:layout_weight="1"
+                android:text="@string/bt1_name" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/bt2"
+                style="@style/Widget.MyButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="1dp"
+                android:layout_weight="1"
+                android:text="@string/bt2_name" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/bt3"
+                style="@style/Widget.MyButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="1dp"
+                android:layout_weight="1"
+                android:text="@string/bt3_name" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/bt4"
+                style="@style/Widget.MyButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="1dp"
+                android:layout_weight="1"
+                android:text="@string/bt4_name" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/bt5"
+                style="@style/Widget.MyButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="1dp"
+                android:layout_weight="1"
+                android:text="@string/bt5_name" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/bt6"
+                style="@style/Widget.MyButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="1dp"
+                android:layout_weight="1"
+                android:text="@string/bt6_name" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/bt7"
+                style="@style/Widget.MyButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="1dp"
+                android:layout_weight="1"
+                android:text="@string/bt7_name" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/bt8"
+                style="@style/Widget.MyButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="1dp"
+                android:layout_weight="1"
+                android:text="@string/bt8_name" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/bt9"
+                style="@style/Widget.MyButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="1dp"
+                android:layout_weight="1"
+                android:text="@string/bt9_name" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/inputs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/controls"
+        android:layout_above="@id/controls"
         android:layout_marginTop="10dp"
         android:orientation="horizontal">
 
@@ -77,7 +186,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@android:drawable/btn_default"
+            android:background="@android:drawable/alert_dark_frame"
             android:contentDescription="@android:string/ok"
             app:srcCompat="@android:drawable/ic_menu_delete" />
 

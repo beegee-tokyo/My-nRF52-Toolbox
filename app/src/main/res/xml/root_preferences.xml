@@ -39,4 +39,164 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory
+        android:title="@string/bt0_header"
+        app:iconSpaceReserved="false">
+
+        <EditTextPreference
+            android:key="bt0_name_value"
+            android:title="@string/button_name_text"
+            app:iconSpaceReserved="false" />
+
+        <EditTextPreference
+            android:key="bt0_value"
+            android:title="@string/button_value_text"
+            app:iconSpaceReserved="false" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/bt1_header"
+        app:iconSpaceReserved="false">
+
+        <EditTextPreference
+            android:key="bt1_name_value"
+            android:title="@string/button_name_text"
+            app:iconSpaceReserved="false" />
+
+        <EditTextPreference
+            android:key="bt1_value"
+            android:title="@string/button_value_text"
+            app:iconSpaceReserved="false" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/bt2_header"
+        app:iconSpaceReserved="false">
+
+        <EditTextPreference
+            android:key="bt2_name_value"
+            android:title="@string/button_name_text"
+            app:iconSpaceReserved="false" />
+
+        <EditTextPreference
+            android:key="bt2_value"
+            android:title="@string/button_value_text"
+            app:iconSpaceReserved="false" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/bt3_header"
+        app:iconSpaceReserved="false">
+
+        <EditTextPreference
+            android:key="bt3_name_value"
+            android:title="@string/button_name_text"
+            app:iconSpaceReserved="false" />
+
+        <EditTextPreference
+            android:key="bt3_value"
+            android:title="@string/button_value_text"
+            app:iconSpaceReserved="false" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/bt4_header"
+        app:iconSpaceReserved="false">
+
+        <EditTextPreference
+            android:key="bt4_name_value"
+            android:title="@string/button_name_text"
+            app:iconSpaceReserved="false" />
+
+        <EditTextPreference
+            android:key="bt4_value"
+            android:title="@string/button_value_text"
+            app:iconSpaceReserved="false" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/bt5_header"
+        app:iconSpaceReserved="false">
+
+        <EditTextPreference
+            android:key="bt5_name_value"
+            android:title="@string/button_name_text"
+            app:iconSpaceReserved="false" />
+
+        <EditTextPreference
+            android:key="bt5_value"
+            android:title="@string/button_value_text"
+            app:iconSpaceReserved="false" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/bt6_header"
+        app:iconSpaceReserved="false">
+
+        <EditTextPreference
+            android:key="bt6_name_value"
+            android:title="@string/button_name_text"
+            app:iconSpaceReserved="false" />
+
+        <EditTextPreference
+            android:key="bt6_value"
+            android:title="@string/button_value_text"
+            app:iconSpaceReserved="false" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/bt7_header"
+        app:iconSpaceReserved="false">
+
+        <EditTextPreference
+            android:key="bt7_name_value"
+            android:title="@string/button_name_text"
+            app:iconSpaceReserved="false" />
+
+        <EditTextPreference
+            android:key="bt7_value"
+            android:title="@string/button_value_text"
+            app:iconSpaceReserved="false" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/bt8_header"
+        app:iconSpaceReserved="false">
+
+        <EditTextPreference
+            android:key="bt8_name_value"
+            android:title="@string/button_name_text"
+            app:iconSpaceReserved="false" />
+
+        <EditTextPreference
+            android:key="bt8_value"
+            android:title="@string/button_value_text"
+            app:iconSpaceReserved="false" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/bt9_header"
+        app:iconSpaceReserved="false">
+
+        <EditTextPreference
+            android:key="bt9_name_value"
+            android:title="@string/button_name_text"
+            app:iconSpaceReserved="false" />
+
+        <EditTextPreference
+            android:key="bt9_value"
+            android:title="@string/button_value_text"
+            app:iconSpaceReserved="false" />
+
+    </PreferenceCategory>
+
 </PreferenceScreen>

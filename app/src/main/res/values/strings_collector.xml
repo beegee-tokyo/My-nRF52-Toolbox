@@ -5,8 +5,8 @@
     <string name="write_button">Send config</string>
     <string name="read_button">Get config</string>
     <string name="erase_button">Erase config</string>
-    <string name="reset_button">Reset Gateway</string>
-    <string name="sel_num_ap">Enable two AP</string>
+    <string name="reset_button">Reset ESP32</string>
+<!--    <string name="sel_num_ap">Enable two AP</string>-->
     <string name="update_button">Update firmware</string>
 
     <!-- Text input -->
@@ -19,7 +19,7 @@
 
     <!-- FW and UI update -->
     <string name="upd_header">Updating device</string>
-    <string name="upd_status">Update messages</string>
+    <string name="upd_status">Update status</string>
     <string name="upd_fw_header">Update progress FW update</string>
     <string name="upd_close">Close</string>
     <string name="upd_req_ota">Sending OTA request</string>
@@ -27,8 +27,11 @@
     <string name="upd_fw_fail">Update FW failed</string>
     <string name="upd_fw_update">Updating Firmware</string>
     <string name="upd_finish">Update finished</string>
+    <string name="manAP">Manually enter AP</string>
+    <string name="autoAP">Available AP</string>
     <string name="showPW">Show Passwords</string>
     <string name="hidePW">Hide Passwords</string>
+    <string name="showFCM">Show FCM devices</string>
 
     <string name="collector_about_text">Used to setup WiFi connection for the LoRa gateway, define the LoRa frequency and update the gateway software.</string>
     <string-array name="region_list">

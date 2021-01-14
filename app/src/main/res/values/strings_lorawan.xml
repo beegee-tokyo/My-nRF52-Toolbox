@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="lora_feature_title">LoRaWAN setup</string>
+
+    <string name="lora_write_button">Send config</string>
+    <string name="lora_read_button">Get config</string>
+    <string name="lora_erase_button">Erase config</string>
+    <string name="lora_reset_button">Reset node</string>
+
+    <!-- Text input -->
+    <string name="lora_mode">LoRaWAN</string>
+    <string name="dev_eui">Device EUI</string>
+    <string name="app_eui">App EUI</string>
+    <string name="app_key">App Key</string>
+    <string name="dev_adr">Device Addr</string>
+    <string name="nws_key">NWS Key</string>
+    <string name="apps_key">AppS Key</string>
+    <string name="otaa_ena">OTAA</string>
+    <string name="adr_ena">ADR</string>
+    <string name="pub_net">Public network</string>
+    <string name="dc_ena">DutyCycle</string>
+    <string name="tx_repeat">Send Repeat Time</string>
+    <string name="nb_trials">Join retries</string>
+    <string name="tx_power">TX power</string>
+    <string name="dr_min">Datarate</string>
+    <string name="lora_class">Class</string>
+    <string name="sub_chan">Subband</string>
+    <string name="join_ena">Auto join</string>
+    <string name="app_port">Data Port</string>
+    <string name="conf_ena">Confirmed Send</string>
+
+    <string name="p2p_frequency">Frequency</string>
+    <string name="p2p_bw">Bandwidth</string>
+    <string name="p2p_bw125">125kHz</string>
+    <string name="p2p_bw250">250kHz</string>
+    <string name="p2p_bw500">500kHz</string>
+    <string name="p2p_sf">Spreading Factor</string>
+    <string name="p2p_sf7">7</string>
+    <string name="p2p_sf8">8</string>
+    <string name="p2p_sf9">9</string>
+    <string name="p2p_sf10">10</string>
+    <string name="p2p_sf11">11</string>
+    <string name="p2p_sf12">12</string>
+    <string name="p2p_cr">Coding Rate</string>
+    <string name="p2p_cr_5">4/5</string>
+    <string name="p2p_cr_6">4/6</string>
+    <string name="p2p_cr_7">4/7</string>
+    <string name="p2p_cr_8">4/8</string>
+    <string name="p2p_pre_len">Preamble Length</string>
+    <string name="p2p_sym_timeout">Symbol Timeout</string>
+
+    <string name="lora_lorawan_about_text">Used to setup LoRaWAN parameters of a RAK LoRaWAN node.</string>
+    <string-array name="lora_region_list">
+        <item>EU868</item>
+        <item>US915</item>
+        <item>US915 Hybrid</item>
+        <item>AS923</item>
+        <item>AU915</item>
+        <item>CN470</item>
+        <item>CN779</item>
+        <item>EU433</item>
+        <item>IN865</item>
+        <item>KR920</item>
+    </string-array>
+
+</resources>

@@ -25,8 +25,8 @@
 	<string name="font_path">fonts/trebucbd.ttf</string>
 	<string name="normal_font_path">fonts/trebuc.ttf</string>
 
-	<string name="shortcut_dfu_short">DFU</string>
-	<string name="shortcut_dfu_long">Device Firmware Update</string>
+<!--	<string name="shortcut_dfu_short">DFU</string>-->
+<!--	<string name="shortcut_dfu_long">Device Firmware Update</string>-->
 
 	<string name="ok">OK</string>
 	<string name="yes">Yes</string>
@@ -43,7 +43,7 @@
 	<string name="drawer_plugins">PLUGINS</string>
 	<string name="drawer_plugin_nrf_connect">nRF Connect</string>
 
-	<string name="battery">%d%%</string>
+<!--	<string name="battery">%d%%</string>-->
 	<string name="not_available">n/a</string>
 	<string name="no_ble">Device doesn\'t have BLE support!</string>
 	<string name="no_apps">No profiles found.</string>
@@ -67,14 +67,37 @@
 	<string name="menu_settings">Settings</string>
     <string name="title_activity_settings">Settings</string>
 
+	<string name="bt0_name">B0</string>
+	<string name="bt1_name">B1</string>
+	<string name="bt2_name">B2</string>
+	<string name="bt3_name">B3</string>
+	<string name="bt4_name">B4</string>
+	<string name="bt5_name">B5</string>
+	<string name="bt6_name">B6</string>
+	<string name="bt7_name">B7</string>
+	<string name="bt8_name">B8</string>
+	<string name="bt9_name">B9</string>
+
     <!-- Preference Titles -->
     <string name="uuid_filter_header">OTA DFU UUID filter settings</string>
     <string name="name_filter_header">Device name filter settings</string>
+	<string name="bt0_header">Set Button 1</string>
+	<string name="bt1_header">Set Button 2</string>
+	<string name="bt2_header">Set Button 3</string>
+	<string name="bt3_header">Set Button 4</string>
+	<string name="bt4_header">Set Button 5</string>
+	<string name="bt5_header">Set Button 6</string>
+	<string name="bt6_header">Set Button 7</string>
+	<string name="bt7_header">Set Button 8</string>
+	<string name="bt8_header">Set Button 9</string>
+	<string name="bt9_header">Set Button 10</string>
+	<string name="button_name_text">Name</string>
+	<string name="button_value_text">Value</string>
 
     <!-- UUID Filter Preferences -->
 	<string name="settings_enable_UUID">Custom OTA DFU UUID filter</string>
 	<string name="settings_UUID_text">Enter custom UUID as 4 digit HEX string</string>
-	<string name="settings_UUID_hint">1530</string>
+<!--	<string name="settings_UUID_hint">1530</string>-->
 	<string name="settings_UUID_summary">Enable UUID filter for DFU application. If the filter is set, only devices that advertise this UUID will be shown</string>
 	<string name="settings_invalidUUID">You entered an invalid UUID!</string>
 
@@ -82,6 +105,5 @@
 	<string name="settings_enable_name">Device name filter</string>
 	<string name="settings_name_text">Enter first 2–4 letters of the device name</string>
 	<string name="settings_name_summary">Enable device name filter. If the filter is set, only devices that advertise a name beginning with this filter be shown</string>
-    <string name="sync_title">Sync email periodically</string>
 
 </resources>

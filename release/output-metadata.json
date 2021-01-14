@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "artifactType": {
+    "type": "APK",
+    "kind": "Directory"
+  },
+  "applicationId": "tk.giesecke.my_nrf52_tb",
+  "variantName": "release",
+  "elements": [
+    {
+      "type": "SINGLE",
+      "filters": [],
+      "properties": [],
+      "versionCode": 1,
+      "versionName": "0.1beta",
+      "enabled": true,
+      "outputFile": "tk.giesecke.my_nrf52_tb-V_0.1-release.apk"
+    }
+  ]
+}

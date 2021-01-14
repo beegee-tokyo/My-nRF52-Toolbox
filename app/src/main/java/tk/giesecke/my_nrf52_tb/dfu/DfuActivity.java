@@ -82,6 +82,7 @@ import tk.giesecke.my_nrf52_tb.dfu.fragment.UploadCancelFragment;
 import tk.giesecke.my_nrf52_tb.scanner.ScannerFragment;
 
 import static tk.giesecke.my_nrf52_tb.FeaturesActivity.reqUUID;
+import static tk.giesecke.my_nrf52_tb.FeaturesActivity.reqUUIDena;
 
 /**
  * DfuActivity is the main DFU activity It implements DFUManagerCallbacks to receive callbacks from DFUManager class It implements
@@ -409,7 +410,7 @@ public class DfuActivity extends AppCompatActivity implements LoaderCallbacks<Cu
 	private void showDeviceScanningDialog() {
 		// UUID was NULL
 		ScannerFragment dialog;
-		if (reqUUID != null) {
+		if ((reqUUIDena) && (reqUUID != null)) {
 			dialog = ScannerFragment.getInstance(reqUUID);
 		}
 		else {
@@ -590,7 +591,7 @@ public class DfuActivity extends AppCompatActivity implements LoaderCallbacks<Cu
 						reqUUID = UUID.fromString(tempUUID);
 					} catch (IllegalArgumentException ignore) {
 						reqUUID = null;
-						Toast.makeText(this, R.string.settings_invalidUUID, Toast.LENGTH_SHORT);
+						Toast.makeText(this, R.string.settings_invalidUUID, Toast.LENGTH_SHORT).show();
 					}
 				}
 			} else {

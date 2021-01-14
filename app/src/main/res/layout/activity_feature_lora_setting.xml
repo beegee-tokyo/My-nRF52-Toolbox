@@ -1,0 +1,723 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="tk.giesecke.my_nrf52_tb.lora_setup.LoRa_Settings_Activity"
+    tools:ignore="Autofill, LabelFor, TooManyViews">
+
+    <include
+        android:id="@+id/toolbar_actionbar"
+        layout="@layout/toolbar" />
+
+    <Button
+        android:id="@+id/action_connect"
+        style="@style/Widget.Connect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/action_connect"
+        android:visibility="gone" />
+
+    <tk.giesecke.my_nrf52_tb.widget.ForegroundRelativeLayout
+        style="@style/HeaderShadow"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/device_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            android:text="@string/scanner_default_name" />
+
+        <View
+            android:id="@+id/lora_center"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true" />
+
+        <TableLayout
+            android:id="@+id/buttons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/lora_eraseBT"
+            android:layout_alignParentStart="true">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/lora_readBT"
+                    style="@style/Widget.MyButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:enabled="false"
+                    android:onClick="onClickLoRaRead"
+                    android:text="@string/lora_read_button"
+                    android:textColor="@android:color/holo_blue_dark"
+                    android:textStyle="bold" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/lora_writeBT"
+                    style="@style/Widget.MyButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:enabled="false"
+                    android:onClick="onClickLoRaWrite"
+                    android:text="@string/lora_write_button"
+                    android:textColor="@android:color/holo_green_dark"
+                    android:textStyle="bold" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <CheckBox
+                    android:id="@+id/lora_mode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/lora_mode" />
+
+                <!--                <androidx.appcompat.widget.AppCompatButton-->
+                <!--                    android:id="@+id/lora_eraseBT"-->
+                <!--                    style="@style/Widget.MyButton"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_margin="1dp"-->
+                <!--                    android:layout_weight="1"-->
+                <!--                    android:onClick="onClickErase"-->
+                <!--                    android:text="@string/erase_button"-->
+                <!--                    android:textColor="@android:color/holo_red_dark"-->
+                <!--                    android:textStyle="bold" />-->
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/lora_resetBT"
+                    style="@style/Widget.MyButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:enabled="false"
+                    android:onClick="onClickLoRaReset"
+                    android:text="@string/lora_reset_button"
+                    android:textColor="@android:color/holo_orange_dark"
+                    android:textStyle="bold" />
+
+            </TableRow>
+
+        </TableLayout>
+
+        <ScrollView
+            android:id="@+id/lora_lorawan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/buttons"
+            android:layout_alignParentStart="true"
+            android:visibility="gone">
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/dev_eui" />
+
+                    <EditText
+                        android:id="@+id/lora_dev_eui"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="10"
+                        android:digits="0123456789ABCDEF"
+                        android:inputType="textCapCharacters"
+                        android:maxLength="16" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/app_eui" />
+
+                    <EditText
+                        android:id="@+id/lora_app_eui"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="10"
+                        android:digits="0123456789ABCDEF"
+                        android:inputType="textCapCharacters"
+                        android:maxLength="16" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/app_key" />
+
+                    <EditText
+                        android:id="@+id/lora_app_key"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="10"
+                        android:digits="0123456789ABCDEF"
+                        android:inputType="textCapCharacters"
+                        android:maxLength="32" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/dev_adr" />
+
+                    <EditText
+                        android:id="@+id/lora_dev_addr"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="10"
+                        android:digits="0123456789ABCDEF"
+                        android:inputType="textCapCharacters"
+                        android:maxLength="8" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/nws_key" />
+
+                    <EditText
+                        android:id="@+id/lora_nws_key"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="10"
+                        android:digits="0123456789ABCDEF"
+                        android:inputType="textCapCharacters"
+                        android:maxLength="32" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/apps_key" />
+
+                    <EditText
+                        android:id="@+id/lora_apps_key"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="10"
+                        android:digits="0123456789ABCDEF"
+                        android:inputType="textCapCharacters"
+                        android:maxLength="32" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <CheckBox
+                        android:id="@+id/lora_otaa"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/otaa_ena" />
+
+                    <CheckBox
+                        android:id="@+id/lora_pub_net"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/pub_net" />
+
+                    <CheckBox
+                        android:id="@+id/lora_duty_cycle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/dc_ena" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <CheckBox
+                        android:id="@+id/lora_adr"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/adr_ena" />
+
+                    <CheckBox
+                        android:id="@+id/lora_join"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/join_ena" />
+
+                    <CheckBox
+                        android:id="@+id/lora_conf_msg"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/conf_ena" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="@string/dr_min">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/lora_datarate"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="@string/tx_power">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/lora_tx_pwr"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!--                    <TextView-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:layout_weight="1"-->
+                    <!--                        android:text="@string/dr_min" />-->
+
+                    <!--                    <EditText-->
+                    <!--                        android:id="@+id/lora_datarate"-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:layout_weight="1"-->
+                    <!--                        android:digits="0123456789"-->
+                    <!--                        android:inputType="textCapCharacters"-->
+                    <!--                        android:maxLength="2" />-->
+
+                    <!--                    <TextView-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:layout_weight="1"-->
+                    <!--                        android:text="@string/tx_power" />-->
+
+                    <!--                    <EditText-->
+                    <!--                        android:id="@+id/lora_tx_pwr"-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:layout_weight="1"-->
+                    <!--                        android:digits="0123456789"-->
+                    <!--                        android:inputType="textCapCharacters"-->
+                    <!--                        android:maxLength="2" />-->
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="@string/lora_class">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/lora_class"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="@string/sub_chan">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/lora_subband"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!--                    <TextView-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:layout_weight="1"-->
+                    <!--                        android:text="@string/lora_class" />-->
+
+                    <!--                    <EditText-->
+                    <!--                        android:id="@+id/lora_class"-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:layout_weight="1"-->
+                    <!--                        android:digits="0123456789"-->
+                    <!--                        android:inputType="textCapCharacters"-->
+                    <!--                        android:maxLength="2" />-->
+
+                    <!--                    <TextView-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:layout_weight="1"-->
+                    <!--                        android:text="@string/sub_chan" />-->
+
+                    <!--                    <EditText-->
+                    <!--                        android:id="@+id/lora_subband"-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:layout_weight="1"-->
+                    <!--                        android:digits="0123456789"-->
+                    <!--                        android:inputType="textCapCharacters"-->
+                    <!--                        android:maxLength="2" />-->
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="@string/app_port">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/lora_app_port"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="@string/nb_trials">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/lora_nb_trials"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!--                    <TextView-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:layout_weight="1"-->
+                    <!--                        android:text="@string/app_port" />-->
+
+                    <!--                    <EditText-->
+                    <!--                        android:id="@+id/lora_app_port"-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:layout_weight="4"-->
+                    <!--                        android:digits="0123456789"-->
+                    <!--                        android:inputType="textCapCharacters"-->
+                    <!--                        android:maxLength="2" />-->
+
+                    <!--                    <TextView-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:layout_weight="1"-->
+                    <!--                        android:text="@string/nb_trials" />-->
+
+                    <!--                    <EditText-->
+                    <!--                        android:id="@+id/lora_nb_trials"-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:layout_weight="4"-->
+                    <!--                        android:digits="0123456789"-->
+                    <!--                        android:inputType="textCapCharacters"-->
+                    <!--                        android:maxLength="2" />-->
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="@string/tx_repeat">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/lora_send_repeat"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </TableRow>
+
+            </TableLayout>
+
+        </ScrollView>
+
+        <ScrollView
+            android:id="@+id/lora_lorap2p"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/buttons"
+            android:layout_alignParentStart="true"
+            android:visibility="visible">
+
+            <TableLayout
+                android:id="@+id/lora_p2p"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/p2p_frequency" />
+
+                    <EditText
+                        android:id="@+id/lora_p2p_freq"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="10"
+                        android:digits="0123456789ABCDEF"
+                        android:inputType="number"
+                        android:maxLength="16" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/tx_power" />
+
+                    <EditText
+                        android:id="@+id/lora_p2p_tx_power"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="10"
+                        android:digits="0123456789ABCDEF"
+                        android:inputType="number"
+                        android:maxLength="16" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/p2p_bw" />
+
+                    <RadioGroup
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/bw_125"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/p2p_bw125"
+                            android:layout_weight="1" />
+
+                        <RadioButton
+                            android:id="@+id/bw_250"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/p2p_bw250"
+                            android:layout_weight="1" />
+
+                        <RadioButton
+                            android:id="@+id/bw_500"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/p2p_bw250"
+                            android:layout_weight="1" />
+
+                    </RadioGroup>
+
+                    <EditText
+                        android:id="@+id/lora_p2p_bw"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="10"
+                        android:digits="0123456789ABCDEF"
+                        android:inputType="number"
+                        android:maxLength="16" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/p2p_sf" />
+
+                    <EditText
+                        android:id="@+id/lora_p2p_sf"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="10"
+                        android:digits="0123456789ABCDEF"
+                        android:inputType="number"
+                        android:maxLength="16" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/p2p_cr" />
+
+                    <EditText
+                        android:id="@+id/lora_p2p_cr"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="10"
+                        android:digits="0123456789ABCDEF"
+                        android:inputType="number"
+                        android:maxLength="16" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/p2p_pre_len" />
+
+                    <EditText
+                        android:id="@+id/lora_p2p_pre_len"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="10"
+                        android:digits="0123456789ABCDEF"
+                        android:inputType="number"
+                        android:maxLength="16" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/p2p_sym_timeout" />
+
+                    <EditText
+                        android:id="@+id/lora_p2p_sym_timeout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="10"
+                        android:digits="0123456789ABCDEF"
+                        android:inputType="number"
+                        android:maxLength="16" />
+
+                </TableRow>
+
+            </TableLayout>
+
+        </ScrollView>
+
+    </tk.giesecke.my_nrf52_tb.widget.ForegroundRelativeLayout>
+
+</LinearLayout>
+

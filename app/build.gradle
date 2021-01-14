@@ -17,7 +17,7 @@ android {
         targetSdkVersion 29
         versionCode 1
         versionName '0.1'
-        project.ext.set("archivesBaseName", "rocks.circuit.src-V_" + defaultConfig.versionName)
+        project.ext.set("archivesBaseName", "tk.giesecke.my_nrf52_tb-V_" + defaultConfig.versionName)
         versionNameSuffix 'beta'
         resConfigs "en"
         multiDexEnabled true

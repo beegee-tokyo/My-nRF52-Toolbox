@@ -53,7 +53,7 @@
 
         <!-- Collector plugin activities -->
         <activity
-            android:name=".collector.CollectorActivity"
+            android:name=".esp32_setup.ESP32_Settings_Activity"
             android:icon="@drawable/ic_collector_feature"
             android:label="@string/collector_feature_title">
             <intent-filter>
@@ -64,8 +64,23 @@
         </activity>
 
         <service
-            android:name=".collector.CollectorService"
+            android:name=".esp32_setup.ESP32SettingsService"
             android:label="@string/collector_feature_title" />
+
+        <activity
+            android:name=".lora_setup.LoRa_Settings_Activity"
+            android:icon="@drawable/ic_lora_feature"
+            android:label="@string/lora_feature_title">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="tk.giesecke.my_nrf52_tb" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name=".lora_setup.LoRaSettingsService"
+            android:label="@string/lora_feature_title" />
 
         <activity
             android:name=".uart.UARTActivity"

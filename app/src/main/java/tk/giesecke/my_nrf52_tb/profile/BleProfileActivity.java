@@ -21,6 +21,7 @@
  */
 package tk.giesecke.my_nrf52_tb.profile;
 
+import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothManager;
@@ -56,6 +57,7 @@ public abstract class BleProfileActivity extends AppCompatActivity implements Bl
     private static final String SIS_DEVICE_NAME = "device_name";
     protected static final int REQUEST_ENABLE_BT = 2;
 
+    @SuppressLint("StaticFieldLeak")
     static BleManager<? extends BleManagerCallbacks> mBleManager;
 
     public static boolean doReconnect = false;

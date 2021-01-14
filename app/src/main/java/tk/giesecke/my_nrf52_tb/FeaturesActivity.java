@@ -30,45 +30,26 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.preference.PreferenceManager;
-import android.text.Layout;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.EditText;
 import android.widget.GridView;
-import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ToggleButton;
 
-import androidx.appcompat.app.AlertDialog;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
-import androidx.preference.EditTextPreference;
-import androidx.preference.Preference;
 
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.UUID;
 import java.util.regex.Pattern;
 
 import tk.giesecke.my_nrf52_tb.adapter.AppAdapter;
 
 public class FeaturesActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
-	private static final String NRF_CONNECT_CATEGORY = "no.nordicsemi.android.nrftoolbox.LAUNCHER";
-	private static final String UTILS_CATEGORY = "no.nordicsemi.android.nrftoolbox.UTILS";
-	private static final String NRF_CONNECT_PACKAGE = "no.nordicsemi.android.mcp";
-	private static final String NRF_CONNECT_CLASS = NRF_CONNECT_PACKAGE + ".DeviceListActivity";
-	private static final String NRF_CONNECT_MARKET_URI = "market://details?id=no.nordicsemi.android.mcp";
-
-	// Extras that can be passed from NFC (see SplashscreenActivity)
-	public static final String EXTRA_APP = "application/vnd.no.nordicsemi.type.app";
-	public static final String EXTRA_ADDRESS = "application/vnd.no.nordicsemi.type.address";
-
-//	private DrawerLayout mDrawerLayout;
-//	private ActionBarDrawerToggle mDrawerToggle;
 
 	/**
 	 * Filter for device names
@@ -78,6 +59,14 @@ public class FeaturesActivity extends AppCompatActivity implements SharedPrefere
 	 * Filter UUID for scan
 	 */
 	public static UUID reqUUID = null;
+
+	/**
+	 * Filter UUID enabled
+	 */
+	public static boolean reqUUIDena = false;
+
+	public static String[] buttonNames;
+	public static String[] buttonValues;
 
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
@@ -91,7 +80,7 @@ public class FeaturesActivity extends AppCompatActivity implements SharedPrefere
 		if (!ensureBLEExists())
 			finish();
 
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
 		ArrayList<String> arrPerm = new ArrayList<>();
 		// On newer Android versions it is required to get the permission of the user to
@@ -163,13 +152,11 @@ public class FeaturesActivity extends AppCompatActivity implements SharedPrefere
 
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-		final Intent intent = getIntent();
-		if (intent.hasExtra(EXTRA_APP) && intent.hasExtra(EXTRA_ADDRESS)) {
-			final String app = intent.getStringExtra(EXTRA_APP);
-			switch (app) {
-				default:
-					// other are not supported yet
-			}
+		buttonNames = new String[10];
+		buttonValues = new String[10];
+
+		for (int idx = 0; idx < 10; idx++) {
+			buttonNames[idx] = buttonValues[idx] = "";
 		}
 
 		SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -182,6 +169,7 @@ public class FeaturesActivity extends AppCompatActivity implements SharedPrefere
 			String tempUUID = sharedPreferences.getString(("uuid_filter_value"), "");
 			boolean valid128UUID = false;
 			boolean valid16UUID = false;
+			assert tempUUID != null;
 			if (Pattern.matches("[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}", tempUUID)) {
 				valid128UUID = true;
 			}
@@ -194,13 +182,16 @@ public class FeaturesActivity extends AppCompatActivity implements SharedPrefere
 			if (valid16UUID || valid128UUID) {
 				try {
 					reqUUID = UUID.fromString(tempUUID);
+					reqUUIDena = true;
 					uuidFilterEnabled = true;
 				} catch (IllegalArgumentException ignore) {
+					reqUUIDena = false;
 					reqUUID = null;
 				}
 			}
 		} else {
 			reqUUID = null;
+			reqUUIDena = false;
 		}
 		if (sharedPreferences.getBoolean("name_filter", false)) {
 			devicePrefix = sharedPreferences.getString(("name_filter_value"), "");
@@ -238,7 +229,7 @@ public class FeaturesActivity extends AppCompatActivity implements SharedPrefere
 	}
 
 	@Override
-	public void onConfigurationChanged(final Configuration newConfig) {
+	public void onConfigurationChanged(@NonNull final Configuration newConfig) {
 		super.onConfigurationChanged(newConfig);
 //		mDrawerToggle.onConfigurationChanged(newConfig);
 	}
@@ -272,12 +263,14 @@ public class FeaturesActivity extends AppCompatActivity implements SharedPrefere
 		if (key.equals("uuid_filter") || key.equals("uuid_filter_value")) {
 			if (sharedPreferences.getBoolean("uuid_filter", true)) {
 				String newUuidFilter = sharedPreferences.getString(("uuid_filter_value"), "");
+				assert newUuidFilter != null;
 				if (newUuidFilter.isEmpty()) {
 					return;
 				}
 				String tempUUID = sharedPreferences.getString(("uuid_filter_value"), "");
 				boolean valid128UUID = false;
 				boolean valid16UUID = false;
+				assert tempUUID != null;
 				if (Pattern.matches("[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}", tempUUID)) {
 					valid128UUID = true;
 				}
@@ -292,7 +285,7 @@ public class FeaturesActivity extends AppCompatActivity implements SharedPrefere
 						reqUUID = UUID.fromString(tempUUID);
 					} catch (IllegalArgumentException ignore) {
 						reqUUID = null;
-						Toast.makeText(this, R.string.settings_invalidUUID, Toast.LENGTH_SHORT);
+						Toast.makeText(this, R.string.settings_invalidUUID, Toast.LENGTH_SHORT).show();
 					}
 				}
 			} else {
