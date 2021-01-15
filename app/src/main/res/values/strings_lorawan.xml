@@ -34,20 +34,20 @@
     <string name="p2p_bw125">125kHz</string>
     <string name="p2p_bw250">250kHz</string>
     <string name="p2p_bw500">500kHz</string>
-    <string name="p2p_sf">Spreading Factor</string>
+    <string name="p2p_sf">Spreading\nFactor</string>
     <string name="p2p_sf7">7</string>
     <string name="p2p_sf8">8</string>
     <string name="p2p_sf9">9</string>
     <string name="p2p_sf10">10</string>
     <string name="p2p_sf11">11</string>
     <string name="p2p_sf12">12</string>
-    <string name="p2p_cr">Coding Rate</string>
+    <string name="p2p_cr">Coding\nRate</string>
     <string name="p2p_cr_5">4/5</string>
     <string name="p2p_cr_6">4/6</string>
     <string name="p2p_cr_7">4/7</string>
     <string name="p2p_cr_8">4/8</string>
-    <string name="p2p_pre_len">Preamble Length</string>
-    <string name="p2p_sym_timeout">Symbol Timeout</string>
+    <string name="p2p_pre_len">Preamble\nLength</string>
+    <string name="p2p_sym_timeout">Symbol\nTimeout</string>
 
     <string name="lora_lorawan_about_text">Used to setup LoRaWAN parameters of a RAK LoRaWAN node.</string>
     <string-array name="lora_region_list">

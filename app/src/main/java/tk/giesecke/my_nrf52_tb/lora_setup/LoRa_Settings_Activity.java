@@ -16,7 +16,11 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.ScrollView;
+import android.widget.SeekBar;
+import android.widget.TextView;
 
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
@@ -98,11 +102,22 @@ public class LoRa_Settings_Activity extends BleProfileServiceReadyActivity<LoRaS
     EditText lora_send_repeat;
 
     EditText lora_p2p_freq;
-    EditText lora_p2p_tx_power;
-    EditText lora_p2p_bw;
-    EditText lora_p2p_sf;
-    EditText lora_p2p_cr;
-    EditText lora_p2p_pre_len;
+    SeekBar lora_p2p_tx_power;
+    RadioButton lora_p2p_bw125;
+    RadioButton lora_p2p_bw250;
+    RadioButton lora_p2p_bw500;
+    SeekBar lora_p2p_sf;
+//    RadioButton lora_p2p_sf7;
+//    RadioButton lora_p2p_sf8;
+//    RadioButton lora_p2p_sf9;
+//    RadioButton lora_p2p_sf10;
+//    RadioButton lora_p2p_sf11;
+//    RadioButton lora_p2p_sf12;
+    RadioButton lora_p2p_cr5;
+    RadioButton lora_p2p_cr6;
+    RadioButton lora_p2p_cr7;
+    RadioButton lora_p2p_cr8;
+    SeekBar lora_p2p_pre_len;
     EditText lora_p2p_sym_timeout;
 
     private Menu thisMenu;
@@ -154,10 +169,82 @@ public class LoRa_Settings_Activity extends BleProfileServiceReadyActivity<LoRaS
 
         lora_p2p_freq = findViewById(R.id.lora_p2p_freq);
         lora_p2p_tx_power = findViewById(R.id.lora_p2p_tx_power);
-        lora_p2p_bw = findViewById(R.id.lora_p2p_bw);
-        lora_p2p_sf = findViewById(R.id.lora_p2p_sf);
-        lora_p2p_cr = findViewById(R.id.lora_p2p_cr);
+        lora_p2p_tx_power.setOnSeekBarChangeListener(
+                new SeekBar.OnSeekBarChangeListener()
+                {
+                    @Override
+                    public void onStopTrackingTouch(SeekBar seekBar) {}
+
+                    @Override
+                    public void onStartTrackingTouch(SeekBar seekBar) {}
+
+                    @Override
+                    public void onProgressChanged(SeekBar seekBar, int progress,
+                                                  boolean fromUser)
+                    {
+                        TextView pwrText = findViewById(R.id.tv_pwr_num);
+                        p2pTxPower = (byte)(progress);
+
+                        pwrText.setText(String.valueOf(p2pTxPower));
+                    }
+                }
+        );
+        lora_p2p_bw125 = findViewById(R.id.bw_125);
+        lora_p2p_bw250 = findViewById(R.id.bw_250);
+        lora_p2p_bw500 = findViewById(R.id.bw_500);
+        lora_p2p_sf = findViewById(R.id.sf_sel);
+        lora_p2p_sf.setOnSeekBarChangeListener(
+                new SeekBar.OnSeekBarChangeListener()
+                {
+                    @Override
+                    public void onStopTrackingTouch(SeekBar seekBar) {}
+
+                    @Override
+                    public void onStartTrackingTouch(SeekBar seekBar) {}
+
+                    @Override
+                    public void onProgressChanged(SeekBar seekBar, int progress,
+                                                  boolean fromUser)
+                    {
+                        TextView sfText = findViewById(R.id.sf_sel_num);
+                        p2pSF = (byte)(progress + 7);
+
+                        sfText.setText(String.valueOf(p2pSF));
+                    }
+                }
+        );
+//        lora_p2p_sf7 = findViewById(R.id.sf_7);
+//        lora_p2p_sf8 = findViewById(R.id.sf_8);
+//        lora_p2p_sf9 = findViewById(R.id.sf_9);
+//        lora_p2p_sf10 = findViewById(R.id.sf_10);
+//        lora_p2p_sf11 = findViewById(R.id.sf_11);
+//        lora_p2p_sf12 = findViewById(R.id.sf_12);
+        lora_p2p_cr5 = findViewById(R.id.cr_5);
+        lora_p2p_cr6 = findViewById(R.id.cr_6);
+        lora_p2p_cr7 = findViewById(R.id.cr_7);
+        lora_p2p_cr8 = findViewById(R.id.cr_8);
+
         lora_p2p_pre_len = findViewById(R.id.lora_p2p_pre_len);
+        lora_p2p_pre_len.setOnSeekBarChangeListener(
+                new SeekBar.OnSeekBarChangeListener()
+                {
+                    @Override
+                    public void onStopTrackingTouch(SeekBar seekBar) {}
+
+                    @Override
+                    public void onStartTrackingTouch(SeekBar seekBar) {}
+
+                    @Override
+                    public void onProgressChanged(SeekBar seekBar, int progress,
+                                                  boolean fromUser)
+                    {
+                        TextView prelenText = findViewById(R.id.tv_prelen_num);
+                        p2pPreLen = (byte)(progress+1);
+
+                        prelenText.setText(String.valueOf(p2pPreLen));
+                    }
+                }
+        );
         lora_p2p_sym_timeout = findViewById(R.id.lora_p2p_sym_timeout);
 
         lora_mode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -299,11 +386,34 @@ public class LoRa_Settings_Activity extends BleProfileServiceReadyActivity<LoRaS
             lora_app_port.setText(String.valueOf(appPort));
             lora_mode.setChecked(loraWanEna);
             lora_p2p_freq.setText(String.valueOf(p2pFrequency));
-            lora_p2p_tx_power.setText(String.valueOf(p2pTxPower));
-            lora_p2p_bw.setText(String.valueOf(p2pBW));
-            lora_p2p_sf.setText(String.valueOf(p2pSF));
-            lora_p2p_cr.setText(String.valueOf(p2pCR));
-            lora_p2p_pre_len.setText(String.valueOf(p2pPreLen));
+            lora_p2p_tx_power.setProgress(p2pTxPower);
+            switch (p2pBW) {
+                case 0:
+                    lora_p2p_bw125.setChecked(true);
+                    break;
+                case 1:
+                    lora_p2p_bw250.setChecked(true);
+                    break;
+                case 2:
+                    lora_p2p_bw500.setChecked(true);
+                    break;
+            }
+            lora_p2p_sf.setProgress(p2pSF - 7);
+            switch (p2pCR) {
+                case 5:
+                    lora_p2p_cr5.setChecked(true);
+                    break;
+                case 6:
+                    lora_p2p_cr6.setChecked(true);
+                    break;
+                case 7:
+                    lora_p2p_cr7.setChecked(true);
+                    break;
+                case 8:
+                    lora_p2p_cr8.setChecked(true);
+                    break;
+            }
+            lora_p2p_pre_len.setProgress(p2pPreLen-1);
             lora_p2p_sym_timeout.setText(String.valueOf(p2pSymTimeout));
             if (loraWanEna) {
                 lora_lorap2p.setVisibility(View.GONE);
@@ -326,157 +436,6 @@ public class LoRa_Settings_Activity extends BleProfileServiceReadyActivity<LoRaS
         // Send settings to device
 
         byte[] newSettings = prepareSettings(false);
-//        byte[] newSettings = new byte[105];
-//
-//        newSettings[0] = -86;
-//        newSettings[1] = 0x55;
-//        nodeDeviceEUI = lora_dev_eui.getText().toString();
-//        newSettings[2] = (byte)Integer.parseInt(nodeDeviceEUI.substring(0,2),16);
-//        newSettings[3] = (byte)Integer.parseInt(nodeDeviceEUI.substring(2,4),16);
-//        newSettings[4] = (byte)Integer.parseInt(nodeDeviceEUI.substring(4,6),16);
-//        newSettings[5] = (byte)Integer.parseInt(nodeDeviceEUI.substring(6,8),16);
-//        newSettings[6] = (byte)Integer.parseInt(nodeDeviceEUI.substring(8,10),16);
-//        newSettings[7] = (byte)Integer.parseInt(nodeDeviceEUI.substring(10,12),16);
-//        newSettings[8] = (byte)Integer.parseInt(nodeDeviceEUI.substring(12,14),16);
-//        newSettings[9] = (byte)Integer.parseInt(nodeDeviceEUI.substring(14),16);
-//
-//        nodeAppEUI = lora_app_eui.getText().toString();
-//        newSettings[10] = (byte)Integer.parseInt(nodeAppEUI.substring(0,2),16);
-//        newSettings[11] = (byte)Integer.parseInt(nodeAppEUI.substring(2,4),16);
-//        newSettings[12] = (byte)Integer.parseInt(nodeAppEUI.substring(4,6),16);
-//        newSettings[13] = (byte)Integer.parseInt(nodeAppEUI.substring(6,8),16);
-//        newSettings[14] = (byte)Integer.parseInt(nodeAppEUI.substring(8,10),16);
-//        newSettings[15] = (byte)Integer.parseInt(nodeAppEUI.substring(10,12),16);
-//        newSettings[16] = (byte)Integer.parseInt(nodeAppEUI.substring(12,14),16);
-//        newSettings[17] = (byte)Integer.parseInt(nodeAppEUI.substring(14),16);
-//
-//        nodeAppKey = lora_app_key.getText().toString();
-//        newSettings[18] = (byte)Integer.parseInt(nodeAppKey.substring(0,2),16);
-//        newSettings[19] = (byte)Integer.parseInt(nodeAppKey.substring(2,4),16);
-//        newSettings[20] = (byte)Integer.parseInt(nodeAppKey.substring(4,6),16);
-//        newSettings[21] = (byte)Integer.parseInt(nodeAppKey.substring(6,8),16);
-//        newSettings[22] = (byte)Integer.parseInt(nodeAppKey.substring(8,10),16);
-//        newSettings[23] = (byte)Integer.parseInt(nodeAppKey.substring(10,12),16);
-//        newSettings[24] = (byte)Integer.parseInt(nodeAppKey.substring(12,14),16);
-//        newSettings[25] = (byte)Integer.parseInt(nodeAppKey.substring(14,16),16);
-//        newSettings[26] = (byte)Integer.parseInt(nodeAppKey.substring(16,18),16);
-//        newSettings[27] = (byte)Integer.parseInt(nodeAppKey.substring(18,20),16);
-//        newSettings[28] = (byte)Integer.parseInt(nodeAppKey.substring(20,22),16);
-//        newSettings[29] = (byte)Integer.parseInt(nodeAppKey.substring(22,24),16);
-//        newSettings[30] = (byte)Integer.parseInt(nodeAppKey.substring(24,26),16);
-//        newSettings[31] = (byte)Integer.parseInt(nodeAppKey.substring(26,28),16);
-//        newSettings[32] = (byte)Integer.parseInt(nodeAppKey.substring(28,30),16);
-//        newSettings[33] = (byte)Integer.parseInt(nodeAppKey.substring(30),16);
-//
-//        newSettings[34] = 0;
-//        newSettings[35] = 0;
-//
-//        nodeDeviceAddr = lora_dev_addr.getText().toString();
-//        newSettings[39] = (byte)Integer.parseInt(nodeDeviceAddr.substring(0,2),16);
-//        newSettings[38] = (byte)Integer.parseInt(nodeDeviceAddr.substring(2,4),16);
-//        newSettings[37] = (byte)Integer.parseInt(nodeDeviceAddr.substring(4,6),16);
-//        newSettings[36] = (byte)Integer.parseInt(nodeDeviceAddr.substring(6,8),16);
-//
-//        nodeNwsKey = lora_nws_key.getText().toString();
-//        newSettings[40] = (byte)Integer.parseInt(nodeNwsKey.substring(0,2),16);
-//        newSettings[41] = (byte)Integer.parseInt(nodeNwsKey.substring(2,4),16);
-//        newSettings[42] = (byte)Integer.parseInt(nodeNwsKey.substring(4,6),16);
-//        newSettings[43] = (byte)Integer.parseInt(nodeNwsKey.substring(6,8),16);
-//        newSettings[44] = (byte)Integer.parseInt(nodeNwsKey.substring(8,10),16);
-//        newSettings[45] = (byte)Integer.parseInt(nodeNwsKey.substring(10,12),16);
-//        newSettings[46] = (byte)Integer.parseInt(nodeNwsKey.substring(12,14),16);
-//        newSettings[47] = (byte)Integer.parseInt(nodeNwsKey.substring(14,16),16);
-//        newSettings[48] = (byte)Integer.parseInt(nodeNwsKey.substring(16,18),16);
-//        newSettings[49] = (byte)Integer.parseInt(nodeNwsKey.substring(18,20),16);
-//        newSettings[50] = (byte)Integer.parseInt(nodeNwsKey.substring(20,22),16);
-//        newSettings[51] = (byte)Integer.parseInt(nodeNwsKey.substring(22,24),16);
-//        newSettings[52] = (byte)Integer.parseInt(nodeNwsKey.substring(24,26),16);
-//        newSettings[53] = (byte)Integer.parseInt(nodeNwsKey.substring(26,28),16);
-//        newSettings[54] = (byte)Integer.parseInt(nodeNwsKey.substring(28,30),16);
-//        newSettings[55] = (byte)Integer.parseInt(nodeNwsKey.substring(30),16);
-//
-//        nodeAppsKey = lora_apps_key.getText().toString();
-//        newSettings[56] = (byte)Integer.parseInt(nodeAppsKey.substring(0,2),16);
-//        newSettings[57] = (byte)Integer.parseInt(nodeAppsKey.substring(2,4),16);
-//        newSettings[58] = (byte)Integer.parseInt(nodeAppsKey.substring(4,6),16);
-//        newSettings[59] = (byte)Integer.parseInt(nodeAppsKey.substring(6,8),16);
-//        newSettings[60] = (byte)Integer.parseInt(nodeAppsKey.substring(8,10),16);
-//        newSettings[61] = (byte)Integer.parseInt(nodeAppsKey.substring(10,12),16);
-//        newSettings[62] = (byte)Integer.parseInt(nodeAppsKey.substring(12,14),16);
-//        newSettings[63] = (byte)Integer.parseInt(nodeAppsKey.substring(14,16),16);
-//        newSettings[64] = (byte)Integer.parseInt(nodeAppsKey.substring(16,18),16);
-//        newSettings[65] = (byte)Integer.parseInt(nodeAppsKey.substring(18,20),16);
-//        newSettings[66] = (byte)Integer.parseInt(nodeAppsKey.substring(20,22),16);
-//        newSettings[67] = (byte)Integer.parseInt(nodeAppsKey.substring(22,24),16);
-//        newSettings[68] = (byte)Integer.parseInt(nodeAppsKey.substring(24,26),16);
-//        newSettings[69] = (byte)Integer.parseInt(nodeAppsKey.substring(26,28),16);
-//        newSettings[70] = (byte)Integer.parseInt(nodeAppsKey.substring(28,30),16);
-//        newSettings[71] = (byte)Integer.parseInt(nodeAppsKey.substring(30),16);
-//
-//        newSettings[72] = lora_otaa.isChecked() ? (byte)1 : (byte)0;
-//        newSettings[73] = lora_adr.isChecked() ? (byte)1 : (byte)0;
-//        newSettings[74] = lora_pub_net.isChecked() ? (byte)1 : (byte)0;
-//        newSettings[75] = lora_duty_cycle.isChecked() ? (byte)1 : (byte)0;
-//
-//        sendRepeatTime = Long.parseLong(lora_send_repeat.getText().toString());
-//        String value = String.format("%08X",sendRepeatTime);
-//        newSettings[79] = (byte)Integer.parseInt(value.substring(0,2),16);
-//        newSettings[78] = (byte)Integer.parseInt(value.substring(2,4),16);
-//        newSettings[77] = (byte)Integer.parseInt(value.substring(4,6),16);
-//        newSettings[76] = (byte)Integer.parseInt(value.substring(6,8),16);
-//
-//        nbTrials = (byte)Integer.parseInt(lora_nb_trials.getText().toString());
-//        newSettings[80] = nbTrials;
-//        txPower = (byte)Integer.parseInt(lora_tx_pwr.getText().toString());
-//        newSettings[81] = txPower;
-//        dataRate = (byte)Integer.parseInt(lora_datarate.getText().toString());
-//        newSettings[82] = dataRate;
-//        loraClass = (byte)Integer.parseInt(lora_class.getText().toString());
-//        newSettings[83] = loraClass;
-//        subBandChannel = (byte)Integer.parseInt(lora_subband.getText().toString());
-//        newSettings[84] = subBandChannel;
-//
-//        newSettings[85] = lora_join.isChecked() ? (byte)1 : (byte)0;
-//
-//        appPort = (byte)Integer.parseInt(lora_app_port.getText().toString());
-//        newSettings[86] = appPort;
-//
-//        confirmedEna = lora_conf_msg.isChecked();
-//        newSettings[87] = confirmedEna ? (byte)1 : (byte)0;
-//
-//        newSettings[88] = 1;
-//
-//        loraWanEna = lora_conf_msg.isChecked();
-//        newSettings[89] = loraWanEna ? (byte)1 : (byte)0;
-//
-//        newSettings[90] = 0;
-//        newSettings[91] = 0;
-//
-//        p2pFrequency = Long.parseLong(lora_p2p_freq.getText().toString());
-//        value = String.format("%08X",p2pFrequency);
-//        newSettings[95] = (byte)Integer.parseInt(value.substring(0,2),16);
-//        newSettings[94] = (byte)Integer.parseInt(value.substring(2,4),16);
-//        newSettings[93] = (byte)Integer.parseInt(value.substring(4,6),16);
-//        newSettings[92] = (byte)Integer.parseInt(value.substring(6,8),16);
-//
-//        p2pTxPower = (byte)Integer.parseInt(lora_p2p_tx_power.getText().toString());
-//        newSettings[96] = p2pTxPower;
-//        p2pBW = (byte)Integer.parseInt(lora_p2p_bw.getText().toString());
-//        newSettings[97] = p2pBW;
-//        p2pSF = (byte)Integer.parseInt(lora_p2p_sf.getText().toString());
-//        newSettings[98] = p2pSF;
-//        p2pCR = (byte)Integer.parseInt(lora_p2p_cr.getText().toString());
-//        newSettings[99] = p2pCR;
-//        p2pPreLen = (byte)Integer.parseInt(lora_p2p_pre_len.getText().toString());
-//        newSettings[100] = p2pPreLen;
-//
-//        newSettings[101] = 0;
-//
-//        p2pSymTimeout = Integer.parseInt(lora_p2p_sym_timeout.getText().toString());
-//        value = String.format("%04X",p2pSymTimeout);
-//        newSettings[103] = (byte)Integer.parseInt(value.substring(0,2),16);
-//        newSettings[102] = (byte)Integer.parseInt(value.substring(2,4),16);
-//
 
         Log.d(TAG, "Sending: " + new Data(newSettings));
         getService().writeSettings(new Data(newSettings));
@@ -491,7 +450,7 @@ public class LoRa_Settings_Activity extends BleProfileServiceReadyActivity<LoRaS
         // Send reset command to LoRa node
         byte[] newSettings = prepareSettings(true);
         Log.d(TAG, "Sending: " + new Data(newSettings));
-        getService().writeSettings(new Data(newSettings));
+//        getService().writeSettings(new Data(newSettings));
     }
 
     byte[] prepareSettings(boolean reqReset)
@@ -629,15 +588,19 @@ public class LoRa_Settings_Activity extends BleProfileServiceReadyActivity<LoRaS
         newSettings[93] = (byte)Integer.parseInt(value.substring(4,6),16);
         newSettings[92] = (byte)Integer.parseInt(value.substring(6,8),16);
 
-        p2pTxPower = (byte)Integer.parseInt(lora_p2p_tx_power.getText().toString());
+//        p2pTxPower = (byte)Integer.parseInt(lora_p2p_tx_power.getText().toString());
         newSettings[96] = p2pTxPower;
-        p2pBW = (byte)Integer.parseInt(lora_p2p_bw.getText().toString());
-        newSettings[97] = p2pBW;
-        p2pSF = (byte)Integer.parseInt(lora_p2p_sf.getText().toString());
-        newSettings[98] = p2pSF;
-        p2pCR = (byte)Integer.parseInt(lora_p2p_cr.getText().toString());
-        newSettings[99] = p2pCR;
-        p2pPreLen = (byte)Integer.parseInt(lora_p2p_pre_len.getText().toString());
+        RadioGroup buttonGroup = findViewById(R.id.bw_sel);
+        int index = buttonGroup.indexOfChild(findViewById(buttonGroup.getCheckedRadioButtonId()));
+        newSettings[97] = (byte)index;
+//        buttonGroup = findViewById(R.id.sf_sel);
+//        index = buttonGroup.indexOfChild(findViewById(buttonGroup.getCheckedRadioButtonId()));
+//        newSettings[98] = (byte)index;
+        newSettings[98] = (byte)p2pSF;
+        buttonGroup = findViewById(R.id.cr_sel);
+        index = buttonGroup.indexOfChild(findViewById(buttonGroup.getCheckedRadioButtonId()));
+        newSettings[99] = (byte)index;
+//        p2pPreLen = (byte)Integer.parseInt(lora_p2p_pre_len.getText().toString());
         newSettings[100] = p2pPreLen;
 
         newSettings[101] = 0;
