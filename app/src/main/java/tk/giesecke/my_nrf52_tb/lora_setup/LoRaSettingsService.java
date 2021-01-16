@@ -14,6 +14,7 @@ import java.util.Objects;
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+
 import no.nordicsemi.android.ble.data.Data;
 import tk.giesecke.my_nrf52_tb.FeaturesActivity;
 import tk.giesecke.my_nrf52_tb.R;
@@ -43,21 +44,13 @@ public class LoRaSettingsService extends BleProfileService implements LoRa_Setti
 
         /**
          * Send parameters to the device
-         * @param parameter
-         * 			Parameters as String
-         */
-        void writeSettings(final String parameter) {
-            mManager.writeLoRaSettings(parameter);
-        }
-
-        /**
-         * Send parameters to the device
-         * @param parameter
-         * 			Parameters as String
+         *
+         * @param parameter Parameters as String
          */
         void writeSettings(final Data parameter) {
             mManager.writeLoRaSettings(parameter);
         }
+
         /**
          * Read parameters received from device
          */
@@ -117,7 +110,6 @@ public class LoRaSettingsService extends BleProfileService implements LoRa_Setti
 
     /**
      * Creates the notification.
-     *
      */
     private void createNotification() {
         final Intent parentIntent = new Intent(this, FeaturesActivity.class);

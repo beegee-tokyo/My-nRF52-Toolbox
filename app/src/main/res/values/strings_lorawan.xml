@@ -19,7 +19,7 @@
     <string name="adr_ena">ADR</string>
     <string name="pub_net">Public network</string>
     <string name="dc_ena">DutyCycle</string>
-    <string name="tx_repeat">Send Repeat Time</string>
+    <string name="tx_repeat">Send\nRepeat\nTime (s)</string>
     <string name="nb_trials">Join retries</string>
     <string name="tx_power">TX power</string>
     <string name="dr_min">Datarate</string>
@@ -28,9 +28,28 @@
     <string name="join_ena">Auto join</string>
     <string name="app_port">Data Port</string>
     <string name="conf_ena">Confirmed Send</string>
+    <string name="lora_dr_0">0</string>
+    <string name="lora_dr_1">1</string>
+    <string name="lora_dr_2">2</string>
+    <string name="lora_dr_3">3</string>
+    <string name="lora_dr_4">4</string>
+    <string name="lora_dr_5">5</string>
+    <string name="lora_dr_6">6</string>
+    <string name="lora_dr_7">7</string>
+    <string name="lora_dr_8">8</string>
+    <string name="lora_dr_9">9</string>
+    <string name="lora_dr_10">10</string>
+    <string name="lora_dr_11">11</string>
+    <string name="lora_dr_12">12</string>
+    <string name="lora_dr_13">13</string>
+    <string name="lora_dr_14">14</string>
+    <string name="lora_dr_15">15</string>
 
     <string name="p2p_frequency">Frequency</string>
     <string name="p2p_bw">Bandwidth</string>
+    <string name="p2p_freq_range_4">433-490</string>
+    <string name="p2p_freq_range_7">775-870</string>
+    <string name="p2p_freq_range_9">902/928</string>
     <string name="p2p_bw125">125kHz</string>
     <string name="p2p_bw250">250kHz</string>
     <string name="p2p_bw500">500kHz</string>
