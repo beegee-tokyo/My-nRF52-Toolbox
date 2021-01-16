@@ -638,7 +638,6 @@ public class LoRa_Settings_Activity extends BleProfileServiceReadyActivity<LoRaS
             lora_join.setChecked(autoJoin);
             lora_app_port.setProgress(appPort);
             lora_mode.setChecked(loraWanEna);
-//            lora_p2p_freq.setText(String.valueOf(p2pFrequency));
             if (p2pFrequency < 700000000) {
                 setFreqView(0, true);
             } else if (p2pFrequency < 900000000) {
@@ -997,7 +996,6 @@ public class LoRa_Settings_Activity extends BleProfileServiceReadyActivity<LoRaS
         newSettings[90] = 0;
         newSettings[91] = 0;
 
-//        p2pFrequency = Long.parseLong(lora_p2p_freq.getText().toString());
         value = String.format("%08X", p2pFrequency);
         newSettings[95] = (byte) Integer.parseInt(value.substring(0, 2), 16);
         newSettings[94] = (byte) Integer.parseInt(value.substring(2, 4), 16);
