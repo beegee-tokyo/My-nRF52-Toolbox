@@ -526,6 +526,12 @@ public class LoRa_Settings_Activity extends BleProfileServiceReadyActivity<LoRaS
     }
 
     @Override
+    public void onDeviceReady(final BluetoothDevice device) {
+        // Enable notifications
+        getService().enableNotifications(LoRa_Settings_Manager.mRequiredCharacteristic);
+    }
+
+    @Override
     public void onDeviceDisconnected(final BluetoothDevice device) {
         super.onDeviceDisconnected(device);
         thisMenu.findItem(R.id.connect).setIcon(null);
@@ -584,29 +590,6 @@ public class LoRa_Settings_Activity extends BleProfileServiceReadyActivity<LoRaS
                 showOTAA();
             } else {
                 showABP();
-            }
-            if (otaaEna) {
-                TextView title = findViewById(R.id.tv_deveui);
-                title.setVisibility(VISIBLE);
-                title = findViewById(R.id.lora_dev_eui);
-                title.setVisibility(VISIBLE);
-                title = findViewById(R.id.tv_appeui);
-                title.setVisibility(VISIBLE);
-                title = findViewById(R.id.lora_app_eui);
-                title.setVisibility(VISIBLE);
-                title = findViewById(R.id.tv_appkey);
-                title.setVisibility(VISIBLE);
-                title = findViewById(R.id.lora_app_key);
-                title.setVisibility(VISIBLE);
-                CheckBox checkb = findViewById(R.id.lora_otaa);
-                RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) checkb.getLayoutParams();
-                params.addRule(RelativeLayout.BELOW, R.id.tv_appkey);
-                checkb = findViewById(R.id.lora_pub_net);
-                params = (RelativeLayout.LayoutParams) checkb.getLayoutParams();
-                params.addRule(RelativeLayout.BELOW, R.id.tv_appkey);
-                checkb = findViewById(R.id.lora_duty_cycle);
-                params = (RelativeLayout.LayoutParams) checkb.getLayoutParams();
-                params.addRule(RelativeLayout.BELOW, R.id.tv_appkey);
             }
             lora_adr.setChecked(adrEna);
             lora_pub_net.setChecked(publicNetwork);
@@ -919,7 +902,7 @@ public class LoRa_Settings_Activity extends BleProfileServiceReadyActivity<LoRaS
         newSettings[36] = (byte) Integer.parseInt(nodeDeviceAddr.substring(6, 8), 16);
 
         nodeNwsKey = lora_nws_key.getText().toString();
-        if (nodeNwsKey.length() != 8) {
+        if (nodeNwsKey.length() != 32) {
             reportSettingsMismatch("Network Session Key is too short. Please enter correct Network Session Key");
             newSettings[0] = 0;
             return newSettings;
@@ -942,7 +925,7 @@ public class LoRa_Settings_Activity extends BleProfileServiceReadyActivity<LoRaS
         newSettings[55] = (byte) Integer.parseInt(nodeNwsKey.substring(30), 16);
 
         nodeAppsKey = lora_apps_key.getText().toString();
-        if (nodeAppsKey.length() != 8) {
+        if (nodeAppsKey.length() != 32) {
             reportSettingsMismatch("Application Session Key is too short. Please enter correct Application Session Key");
             newSettings[0] = 0;
             return newSettings;
@@ -990,7 +973,7 @@ public class LoRa_Settings_Activity extends BleProfileServiceReadyActivity<LoRaS
 
         newSettings[88] = 1;
 
-        loraWanEna = lora_conf_msg.isChecked();
+        loraWanEna = lora_mode.isChecked();
         newSettings[89] = loraWanEna ? (byte) 1 : (byte) 0;
 
         newSettings[90] = 0;

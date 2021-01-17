@@ -1,5 +1,6 @@
 package tk.giesecke.my_nrf52_tb.lora_setup;
 
+import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothGatt;
 import android.bluetooth.BluetoothGattCharacteristic;
 import android.bluetooth.BluetoothGattService;
@@ -13,6 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import no.nordicsemi.android.ble.data.Data;
+import tk.giesecke.my_nrf52_tb.lora_setup.callback.LoRa_Settings_Callback;
+import tk.giesecke.my_nrf52_tb.lora_setup.callback.LoRa_Settings_CharacteristicCallback;
 import tk.giesecke.my_nrf52_tb.lora_setup.callback.LoRa_Settings_ManagerCallbacks;
 import tk.giesecke.my_nrf52_tb.profile.BleManager;
 
@@ -31,9 +34,9 @@ public class LoRa_Settings_Manager extends BleManager<LoRa_Settings_ManagerCallb
     /**
      * The LoRa settings UUID. 0000aaaa-ead2-11e7-80c1-9a214cf093ae
      */
-    private static final UUID LORA_SETTINGS_UUID = UUID.fromString("0000f0a1-0000-1000-8000-00805f9b34fb"); // LoRa settings
+    static final UUID LORA_SETTINGS_UUID = UUID.fromString("0000f0a1-0000-1000-8000-00805f9b34fb"); // LoRa settings
 
-    private BluetoothGattCharacteristic mRequiredCharacteristic, mSettingsCharacteristic;
+    static BluetoothGattCharacteristic mRequiredCharacteristic, mSettingsCharacteristic;
 
     LoRa_Settings_Manager(final Context context) {
         super(context);
@@ -193,7 +196,7 @@ public class LoRa_Settings_Manager extends BleManager<LoRa_Settings_ManagerCallb
 
                         String value = String.format("%02X%02X%02X%02X",
                                 deviceData[79], deviceData[78], deviceData[77], deviceData[76]);
-                        if (((Long.parseLong(value, 16)) > 3600000) || ((Long.parseLong(value, 16)) > 10000)) {
+                        if (((Long.parseLong(value, 16)) > 3600000) || ((Long.parseLong(value, 16)) < 10000)) {
                             LoRa_Settings_Activity.sendRepeatTime =  120000;
                         } else {
                             LoRa_Settings_Activity.sendRepeatTime = Long.parseLong(value, 16);
@@ -300,4 +303,51 @@ public class LoRa_Settings_Manager extends BleManager<LoRa_Settings_ManagerCallb
                 })
                 .enqueue();
     }
+
+    void requestNotification(BluetoothGattCharacteristic gattChar) {
+        if (gattChar == mRequiredCharacteristic) {
+            setNotificationCallback(mRequiredCharacteristic)
+                    // This callback will be called each time the notification is received
+                    .with(new LoRa_Settings_Callback() {
+                        @Override
+                        public void onDataReceived(@NonNull final BluetoothDevice device, @NonNull final Data data) {
+                            // Let's pass received data to the service
+                            mCallbacks.onSampleValueReceived(device, data);
+                        }
+
+                        @Override
+                        public void onSampleValueReceived(@NonNull final BluetoothDevice device, final Data data) {
+                            // Let's pass received data to the service
+                            mCallbacks.onSampleValueReceived(device, data);
+                        }
+
+                        @Override
+                        public void onInvalidDataReceived(@NonNull final BluetoothDevice device, @NonNull final Data data) {
+                            Log.e(TAG, "Invalid data received: " + data);
+                        }
+                    });
+            enableNotifications(mRequiredCharacteristic)
+                    // Method called after the data were sent (data will contain 0x0100 in this case)
+                    .with((device, data) -> {
+                    })
+                    // Method called when the request finished successfully. This will be called after .with(..) callback
+                    .done(device -> Log.d(TAG, "LoRa Settings Notifications enabled"))
+                    // Methods called in case of an error, for example when the characteristic does not have Notify property
+                    .fail((device, status) -> Log.e(TAG, "LoRa Settings Notifications failed with " + status))
+                    .enqueue();
+        }
+    }
+
+    void stopNotification(BluetoothGattCharacteristic gattChar) {
+        disableNotifications(gattChar)
+                // Method called after the data were sent (data will contain 0x0100 in this case)
+                .with((device, data) -> {
+                })
+                // Method called when the request finished successfully. This will be called after .with(..) callback
+                .done(device -> Log.d(TAG,"Notifications disabled"))
+                // Methods called in case of an error, for example when the characteristic does not have Notify property
+                .fail((device, status) -> Log.d(TAG,"Disable notifications failed with " + status))
+                .enqueue();
+    }
+
 }
