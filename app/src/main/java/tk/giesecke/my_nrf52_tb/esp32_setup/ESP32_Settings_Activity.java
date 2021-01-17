@@ -431,7 +431,7 @@ public class ESP32_Settings_Activity extends BleProfileServiceReadyActivity<ESP3
 				regionSelect.setSelection(regionSelected);
 
 				if (canUpdate) {
-					File dir = new File(Environment.getExternalStorageDirectory() + "/SRC_Portal/");
+					File dir = new File(Environment.getExternalStorageDirectory() + "/Download/");
 
 					// list the files using a anonymous FileFilter
 					files = dir.listFiles(file -> file.getName().startsWith("firmware_gateway"));

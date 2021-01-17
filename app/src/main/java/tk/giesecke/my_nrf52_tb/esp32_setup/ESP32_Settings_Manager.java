@@ -259,6 +259,7 @@ public class ESP32_Settings_Manager extends BleManager<ESP32_Settings_ManagerCal
 							WifiInfo w = mWiFiManager.getConnectionInfo();
 							String mySSID = w.getSSID();
 							mySSID = mySSID.substring(1,mySSID.length()-1);
+
 							ESP32_Settings_Activity.canUpdate = ESP32_Settings_Activity.devAp.equalsIgnoreCase(mySSID);
 						} else {
 							ESP32_Settings_Activity.canUpdate = false;
