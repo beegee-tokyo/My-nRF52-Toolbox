@@ -22,6 +22,7 @@
 package tk.giesecke.my_nrf52_tb;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -36,6 +37,7 @@ import android.widget.GridView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
@@ -119,9 +121,28 @@ public class FeaturesActivity extends AppCompatActivity implements SharedPrefere
 		}
 
 		if (!arrPerm.isEmpty()) {
-			String[] permissions = new String[arrPerm.size()];
-			permissions = arrPerm.toArray(permissions);
-			ActivityCompat.requestPermissions(this, permissions, 0);
+			AlertDialog alertDialog1 = new AlertDialog.Builder(FeaturesActivity.this).create();
+
+			// Setting Dialog Title
+			alertDialog1.setTitle(R.string.scanner_permission_name);
+
+			// Setting Dialog Message
+			alertDialog1.setMessage(getString(R.string.scanner_permission_rationale));
+
+			// Setting OK Button
+
+			alertDialog1.setButton(AlertDialog.BUTTON_NEGATIVE,"NEXT", new DialogInterface.OnClickListener() {
+
+				public void onClick(DialogInterface dialog, int which) {
+					String[] permissions = new String[arrPerm.size()];
+					permissions = arrPerm.toArray(permissions);
+					ActivityCompat.requestPermissions(FeaturesActivity.this, permissions, 0);
+					dialog.cancel();
+				}
+			});
+
+			// Showing Alert Message
+			alertDialog1.show();
 		}
 
 		// Enable access to internet

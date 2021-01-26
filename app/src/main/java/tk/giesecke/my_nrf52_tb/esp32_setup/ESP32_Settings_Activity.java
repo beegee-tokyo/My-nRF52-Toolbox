@@ -255,6 +255,10 @@ public class ESP32_Settings_Activity extends BleProfileServiceReadyActivity<ESP3
 		public void onReceive(final Context context, final Intent intent) {
 			List<ScanResult> scanResults = mainWifi.getScanResults();
 			int resultSize = scanResults.size();
+			if (!ssidPrimList.isEmpty()) {
+				ssidPrimList.clear();
+				ssidSecList.clear();
+			}
 			for (int idx = 0; idx < resultSize; idx++)
 			{
 				ssidPrimList.add(scanResults.get(idx).SSID);
@@ -319,6 +323,7 @@ public class ESP32_Settings_Activity extends BleProfileServiceReadyActivity<ESP3
 		// TODO this method may return the UUID of the service that is required to be in the advertisement packet of a device in order to be listed on the Scanner dialog.
 		// If null is returned no filtering is done.
 		return ESP32_Settings_Manager.COLLECTOR_SERVICE_UUID;
+//		return null;
 	}
 
 	@Override

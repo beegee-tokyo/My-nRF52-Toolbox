@@ -206,8 +206,8 @@ public class LoRa_Settings_Manager extends BleManager<LoRa_Settings_ManagerCallb
                         } else {
                             LoRa_Settings_Activity.nbTrials = (byte) abs(deviceData[80]);
                         }
-                        if (abs(deviceData[81]) > 22) {
-                            LoRa_Settings_Activity.txPower = 22;
+                        if (abs(deviceData[81]) > 15) {
+                            LoRa_Settings_Activity.txPower = 15;
                         } else {
                             LoRa_Settings_Activity.txPower = (byte) abs(deviceData[81]);
                         }

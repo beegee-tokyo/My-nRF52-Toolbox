@@ -59,7 +59,7 @@ public class LoRa_Settings_Activity extends BleProfileServiceReadyActivity<LoRaS
 
     static long sendRepeatTime = 120000;
     static byte nbTrials = 5;
-    static byte txPower = 22;
+    static byte txPower = 0;
     static byte dataRate = 3;
     static byte loraClass = 0;
     static byte subBandChannel = 1;
@@ -263,7 +263,7 @@ public class LoRa_Settings_Activity extends BleProfileServiceReadyActivity<LoRaS
                     public void onProgressChanged(SeekBar seekBar, int progress,
                                                   boolean fromUser) {
                         TextView pwrText = findViewById(R.id.lora_subband_num);
-                        subBandChannel = (byte) (progress);
+                        subBandChannel = (byte) (progress + 1);
 
                         pwrText.setText(String.valueOf(subBandChannel));
                     }
@@ -536,7 +536,7 @@ public class LoRa_Settings_Activity extends BleProfileServiceReadyActivity<LoRaS
         super.onDeviceDisconnected(device);
         thisMenu.findItem(R.id.connect).setIcon(null);
         thisMenu.findItem(R.id.connect).setTitle(getString(R.string.action_connect));
-        Objects.requireNonNull(getSupportActionBar()).setTitle(getString(R.string.collector_feature_title));
+        Objects.requireNonNull(getSupportActionBar()).setTitle(getString(R.string.lora_feature_title));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Button enaBt = findViewById(R.id.lora_readBT);
         enaBt.setEnabled(false);
@@ -617,7 +617,9 @@ public class LoRa_Settings_Activity extends BleProfileServiceReadyActivity<LoRaS
                     pwrText.setText("C");
                     break;
             }
-            lora_subband.setProgress(subBandChannel);
+            lora_subband.setProgress(subBandChannel - 1);
+            pwrText = findViewById(R.id.lora_subband_num);
+            pwrText.setText(String.valueOf(subBandChannel));
             lora_join.setChecked(autoJoin);
             lora_app_port.setProgress(appPort);
             lora_mode.setChecked(loraWanEna);

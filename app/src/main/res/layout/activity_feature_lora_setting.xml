@@ -77,12 +77,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <CheckBox
-                    android:id="@+id/lora_mode"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@string/lora_mode" />
+                    android:orientation="vertical">
+
+                    <CheckBox
+                        android:id="@+id/lora_mode"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/lora_mode" />
+
+                    <CheckBox
+                        android:id="@+id/lora_join"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/join_ena" />
+
+                </LinearLayout>
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/lora_resetBT"
@@ -107,7 +120,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/buttons"
             android:layout_alignParentStart="true"
-            android:visibility="gone"
+            android:visibility="visible"
             android:layout_margin="5dp">
 
             <RelativeLayout
@@ -264,13 +277,13 @@
                     android:layout_below="@id/lora_otaa"
                     android:text="@string/adr_ena" />
 
-                <CheckBox
-                    android:id="@+id/lora_join"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/lora_otaa"
-                    android:layout_toEndOf="@+id/lora_otaa"
-                    android:text="@string/join_ena" />
+<!--                <CheckBox-->
+<!--                    android:id="@+id/lora_join"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_below="@id/lora_otaa"-->
+<!--                    android:layout_toEndOf="@+id/lora_otaa"-->
+<!--                    android:text="@string/join_ena" />-->
 
                 <CheckBox
                     android:id="@+id/lora_conf_msg"
@@ -348,7 +361,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_toEndOf="@id/lora_nb_trials_num"
                     android:layout_alignBottom="@id/lora_tx_pwr_f"
-                    android:max="22" />
+                    android:max="15" />
 
                 <TextView
                     android:id="@+id/lora_class_f"
@@ -418,7 +431,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_toEndOf="@id/lora_nb_trials_num"
                     android:layout_alignBottom="@id/lora_subband_f"
-                    android:max="9" />
+                    android:max="8" />
 
                 <TextView
                     android:id="@+id/lora_app_port_f"
@@ -520,7 +533,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/buttons"
             android:layout_alignParentStart="true"
-            android:visibility="visible"
+            android:visibility="gone"
             android:layout_margin="5dp">
 
             <RelativeLayout

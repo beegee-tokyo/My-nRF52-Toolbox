@@ -304,7 +304,8 @@
             android:layout_toStartOf="@id/center"
             android:gravity="center_horizontal"
             android:text="@string/region_sel_hint"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:visibility="gone" />
 
         <Spinner
             android:id="@+id/sp_region"
@@ -314,7 +315,8 @@
             android:layout_below="@id/regionHdr"
             android:layout_toStartOf="@id/center"
             android:prompt="@string/region_sel_hint"
-            android:textColor="#000000" />
+            android:textColor="#000000"
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/action_connect"
@@ -339,7 +341,8 @@
             android:onClick="onClickShowFCM"
             android:text="@string/showFCM"
             android:textColor="@android:color/holo_red_dark"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:visibility="gone" />
 
         <include
             layout="@layout/ota_update"

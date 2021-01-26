@@ -38,7 +38,7 @@
 			android:background="@color/actionBarColorDark"
 			android:paddingBottom="30dp"
 			android:paddingTop="@dimen/navdrawer_padding_top"
-			android:src="@drawable/lapp_logo_horiz_dark"/>
+			android:src="@drawable/logo_horiz_dark"/>
 
 		<LinearLayout
 			android:layout_width="match_parent"

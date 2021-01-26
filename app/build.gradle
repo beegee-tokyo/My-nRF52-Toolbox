@@ -7,16 +7,17 @@ android {
         applicationId 'tk.giesecke.my_nrf52_tb'
         minSdkVersion 18
         targetSdkVersion 29
-        versionCode 2
-        versionName '0.2'
+        versionCode 4
+        versionName '0.4'
         project.ext.set("archivesBaseName", "tk.giesecke.my_nrf52_tb-V_" + defaultConfig.versionName)
+        project.archivesBaseName = "tk.giesecke.my_nrf52_tb-V_" + defaultConfig.versionName
         versionNameSuffix 'beta'
         resConfigs "en"
         multiDexEnabled true
         vectorDrawables.useSupportLibrary true
     }
     buildTypes {
-        debug {
+         debug {
             minifyEnabled false
 //            useProguard false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'

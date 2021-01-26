@@ -96,5 +96,5 @@
 	<string name="dfu_zip_info_text">The new Distribution packet (ZIP) is the recommended method for distributing firmware upgrades.
 		You can create the ZIP file using the <b>nrf utility</b> tool, which is part of Master Control Panel 3.8.0+. For more detailed information, see the DFU documentation.</string>
 
-	<string name="dfu_about_text">The Device Firmware Update (DFU) app allows you to update the firmware of your Circuitrocks Sensor over-the-air (OTA).</string>
+	<string name="dfu_about_text">The Device Firmware Update (DFU) app allows you to update the firmware of your nRF52 over-the-air (OTA).</string>
 </resources>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="lora_feature_title">LoRaWAN setup</string>
+<resources xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="TypographyDashes">
+    <string name="lora_feature_title">LPWAN setup</string>
 
     <string name="lora_write_button">Send config</string>
     <string name="lora_read_button">Get config</string>
@@ -8,7 +9,7 @@
     <string name="lora_reset_button">Reset node</string>
 
     <!-- Text input -->
-    <string name="lora_mode">LoRaWAN</string>
+    <string name="lora_mode">LPWAN</string>
     <string name="dev_eui">Device EUI</string>
     <string name="app_eui">App EUI</string>
     <string name="app_key">App Key</string>
@@ -49,7 +50,7 @@
     <string name="p2p_bw">Bandwidth</string>
     <string name="p2p_freq_range_4">433-490</string>
     <string name="p2p_freq_range_7">775-870</string>
-    <string name="p2p_freq_range_9">902/928</string>
+    <string name="p2p_freq_range_9">902-928</string>
     <string name="p2p_bw125">125kHz</string>
     <string name="p2p_bw250">250kHz</string>
     <string name="p2p_bw500">500kHz</string>
