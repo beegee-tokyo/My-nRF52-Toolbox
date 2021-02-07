@@ -22,79 +22,77 @@
 package tk.giesecke.my_nrf52_tb;
 
 import android.Manifest;
+import android.content.ActivityNotFoundException;
+import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
+import android.graphics.Color;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.StrictMode;
-import android.preference.PreferenceManager;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.GridView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.ActivityCompat;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.ActivityCompat;
 
-import com.google.android.material.snackbar.Snackbar;
+import android.os.StrictMode;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Objects;
-import java.util.UUID;
-import java.util.regex.Pattern;
+import java.util.List;
 
 import tk.giesecke.my_nrf52_tb.adapter.AppAdapter;
 
-public class FeaturesActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
+public class FeaturesActivity extends AppCompatActivity {
+	private static final String NRF_CONNECT_CATEGORY = "tk.giesecke.my_nrf52_tb.LAUNCHER";
+	private static final String UTILS_CATEGORY = "tk.giesecke.my_nrf52_tb.UTILS";
+	private static final String NRF_CONNECT_PACKAGE = "no.nordicsemi.android.mcp";
+	private static final String NRF_CONNECT_CLASS = NRF_CONNECT_PACKAGE + ".DeviceListActivity";
+	private static final String NRF_CONNECT_MARKET_URI = "market://details?id=no.nordicsemi.android.mcp";
 
-	/**
-	 * Filter for device names
-	 */
-	public static String devicePrefix = "";
-	/**
-	 * Filter UUID for scan
-	 */
-	public static UUID reqUUID = null;
+	// Extras that can be passed from NFC (see SplashScreenActivity)
+	public static final String EXTRA_APP = "application/vnd.no.nordicsemi.type.app";
+	public static final String EXTRA_ADDRESS = "application/vnd.no.nordicsemi.type.address";
 
-	/**
-	 * Filter UUID enabled
-	 */
-	public static boolean reqUUIDena = false;
-
-	public static String[] buttonNames;
-	public static String[] buttonValues;
+	private DrawerLayout drawerLayout;
+	private ActionBarDrawerToggle drawerToggle;
 
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_features);
 
-		final Toolbar toolbar = findViewById(R.id.toolbar_actionbar);
-		setSupportActionBar(toolbar);
+        final Toolbar toolbar = findViewById(R.id.toolbar_actionbar);
+        setSupportActionBar(toolbar);
 
 		// ensure that Bluetooth exists
 		if (!ensureBLEExists())
 			finish();
 
-		Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-
 		ArrayList<String> arrPerm = new ArrayList<>();
 		// On newer Android versions it is required to get the permission of the user to
 		// get the location of the device. I am not sure at all what that has to be with
 		// the permission to use Bluetooth or BLE, but you need to get it anyway
-		if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-			arrPerm.add(Manifest.permission.ACCESS_COARSE_LOCATION);
-		}
-		// On newer Android versions it is required to get the permission of the user to
-		// access the storage of the device.
-		if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-			arrPerm.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+		if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+			arrPerm.add(Manifest.permission.ACCESS_FINE_LOCATION);
 		}
 		// On newer Android versions it is required to get the permission of the user to
 		// access the storage of the device.
@@ -116,10 +114,6 @@ public class FeaturesActivity extends AppCompatActivity implements SharedPrefere
 		if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CHANGE_WIFI_STATE) != PackageManager.PERMISSION_GRANTED) {
 			arrPerm.add(Manifest.permission.CHANGE_WIFI_STATE);
 		}
-		if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-			arrPerm.add(Manifest.permission.ACCESS_COARSE_LOCATION);
-		}
-
 		if (!arrPerm.isEmpty()) {
 			AlertDialog alertDialog1 = new AlertDialog.Builder(FeaturesActivity.this).create();
 
@@ -150,21 +144,21 @@ public class FeaturesActivity extends AppCompatActivity implements SharedPrefere
 		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 		StrictMode.setThreadPolicy(policy);
 
-		//		final DrawerLayout drawer = mDrawerLayout = findViewById(R.id.drawer_layout);
+//		final DrawerLayout drawer = drawerLayout = findViewById(R.id.drawer_layout);
 //		drawer.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
 //
 //		// Set the drawer toggle as the DrawerListener
-//		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.drawer_open, R.string.drawer_close) {
+//		drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.drawer_open, R.string.drawer_close) {
 //            @Override
 //            public void onDrawerSlide(final View drawerView, final float slideOffset) {
 //                // Disable the Hamburger icon animation
 //                super.onDrawerSlide(drawerView, 0);
 //            }
 //        };
-//		drawer.addDrawerListener(mDrawerToggle);
+//		drawer.addDrawerListener(drawerToggle);
 //
 //		// setup plug-ins in the drawer
-//		setupPluginsInDrawer((ViewGroup) drawer.findViewById(R.id.plugin_container));
+//		setupPluginsInDrawer(drawer.findViewById(R.id.plugin_container));
 
 		// configure the app grid
 		final GridView grid = findViewById(R.id.grid);
@@ -173,67 +167,21 @@ public class FeaturesActivity extends AppCompatActivity implements SharedPrefere
 
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-		buttonNames = new String[10];
-		buttonValues = new String[10];
-
-		for (int idx = 0; idx < 10; idx++) {
-			buttonNames[idx] = buttonValues[idx] = "";
-		}
-
-		SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-		sharedPreferences.registerOnSharedPreferenceChangeListener(this);
-
-		boolean uuidFilterEnabled = false;
-		boolean nameFilterEnabled = false;
-
-		if (sharedPreferences.getBoolean("uuid_filter", false)) {
-			String tempUUID = sharedPreferences.getString(("uuid_filter_value"), "");
-			boolean valid128UUID = false;
-			boolean valid16UUID = false;
-			assert tempUUID != null;
-			if (Pattern.matches("[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}", tempUUID)) {
-				valid128UUID = true;
-			}
-			if (Pattern.matches("[a-fA-F0-9]{4}", tempUUID)) {
-				valid16UUID = true;
-			}
-			if (valid16UUID) {
-				tempUUID = "0000" + tempUUID + "-0000-1000-8000-00805F9B34FB";
-			}
-			if (valid16UUID || valid128UUID) {
-				try {
-					reqUUID = UUID.fromString(tempUUID);
-					reqUUIDena = true;
-					uuidFilterEnabled = true;
-				} catch (IllegalArgumentException ignore) {
-					reqUUIDena = false;
-					reqUUID = null;
-				}
-			}
-		} else {
-			reqUUID = null;
-			reqUUIDena = false;
-		}
-		if (sharedPreferences.getBoolean("name_filter", false)) {
-			devicePrefix = sharedPreferences.getString(("name_filter_value"), "");
-			nameFilterEnabled = true;
-		} else {
-			devicePrefix = "";
-		}
-
-		if (uuidFilterEnabled || nameFilterEnabled) {
-			String msg = "REMINDER: You have enabled ";
-			if (uuidFilterEnabled && nameFilterEnabled) {
-				msg += "both UUID and device name filters!";
-			} else if (uuidFilterEnabled) {
-				msg += "the UUID filter!";
-			} else {
-				msg += "the device name filter!";
-			}
-			Snackbar snackbar = Snackbar
-					.make(findViewById(android.R.id.content), msg, Snackbar.LENGTH_LONG);
-			snackbar.show();
-		}
+//		final Intent intent = getIntent();
+//		if (intent.hasExtra(EXTRA_APP) && intent.hasExtra(EXTRA_ADDRESS)) {
+//			final String app = intent.getStringExtra(EXTRA_APP);
+//			switch (app) {
+//				case "HRM":
+//					final Intent newIntent = new Intent(this, HRActivity.class);
+//					newIntent.putExtra(EXTRA_ADDRESS, intent.getByteArrayExtra(EXTRA_ADDRESS));
+//					newIntent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+//					startActivity(newIntent);
+//					break;
+//				default:
+//					// other are not supported yet
+//					break;
+//			}
+//		}
 	}
 
 	@Override
@@ -242,85 +190,35 @@ public class FeaturesActivity extends AppCompatActivity implements SharedPrefere
 		return true;
 	}
 
-	@Override
-	protected void onPostCreate(final Bundle savedInstanceState) {
-		super.onPostCreate(savedInstanceState);
-		// Sync the toggle state after onRestoreInstanceState has occurred.
-//		mDrawerToggle.syncState();
-	}
+//	@Override
+//	protected void onPostCreate(final Bundle savedInstanceState) {
+//		super.onPostCreate(savedInstanceState);
+//		// Sync the toggle state after onRestoreInstanceState has occurred.
+//		drawerToggle.syncState();
+//	}
+//
+//	@Override
+//	public void onConfigurationChanged(@NonNull final Configuration newConfig) {
+//		super.onConfigurationChanged(newConfig);
+//		drawerToggle.onConfigurationChanged(newConfig);
+//	}
 
 	@Override
-	public void onConfigurationChanged(@NonNull final Configuration newConfig) {
-		super.onConfigurationChanged(newConfig);
-//		mDrawerToggle.onConfigurationChanged(newConfig);
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(final MenuItem item) {
+	public boolean onOptionsItemSelected(@NonNull final MenuItem item) {
 		// Pass the event to ActionBarDrawerToggle, if it returns
 		// true, then it has handled the app icon touch event
-//		if (mDrawerToggle.onOptionsItemSelected(item)) {
-//			return true;
-//		}
+		if (drawerToggle.onOptionsItemSelected(item)) {
+			return true;
+		}
 
+		//noinspection SwitchStatementWithTooFewBranches
 		switch (item.getItemId()) {
-			case android.R.id.home:
-				onBackPressed();
-				break;
-			case R.id.action_about:
-				final AppHelpFragment fragment = AppHelpFragment.getInstance(R.string.about_text, true);
-				fragment.show(getSupportFragmentManager(), null);
-				break;
-			case R.id.action_settings:
-				Intent intent = new Intent(this, SettingsActivity.class);
-				startActivity(intent);
+		case R.id.action_about:
+			final AppHelpFragment fragment = AppHelpFragment.getInstance(R.string.about_text, true);
+			fragment.show(getSupportFragmentManager(), null);
+			break;
 		}
 		return true;
-	}
-
-	@Override
-	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-
-		if (key.equals("uuid_filter") || key.equals("uuid_filter_value")) {
-			if (sharedPreferences.getBoolean("uuid_filter", true)) {
-				String newUuidFilter = sharedPreferences.getString(("uuid_filter_value"), "");
-				assert newUuidFilter != null;
-				if (newUuidFilter.isEmpty()) {
-					return;
-				}
-				String tempUUID = sharedPreferences.getString(("uuid_filter_value"), "");
-				boolean valid128UUID = false;
-				boolean valid16UUID = false;
-				assert tempUUID != null;
-				if (Pattern.matches("[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}", tempUUID)) {
-					valid128UUID = true;
-				}
-				if (Pattern.matches("[a-fA-F0-9]{4}", tempUUID)) {
-					valid16UUID = true;
-				}
-				if (valid16UUID) {
-					tempUUID = "0000" + tempUUID + "-0000-1000-8000-00805F9B34FB";
-				}
-				if (valid16UUID || valid128UUID) {
-					try {
-						reqUUID = UUID.fromString(tempUUID);
-					} catch (IllegalArgumentException ignore) {
-						reqUUID = null;
-						Toast.makeText(this, R.string.settings_invalidUUID, Toast.LENGTH_SHORT).show();
-					}
-				}
-			} else {
-				reqUUID = null;
-			}
-			return;
-		}
-		if (key.equals("name_filter") || key.equals("name_filter_value")) {
-			if (sharedPreferences.getBoolean("name_filter", true)) {
-				devicePrefix = sharedPreferences.getString(("name_filter_value"), "");
-			} else {
-				reqUUID = null;
-			}
-		}
 	}
 
 //	private void setupPluginsInDrawer(final ViewGroup container) {
@@ -337,7 +235,7 @@ public class FeaturesActivity extends AppCompatActivity implements SharedPrefere
 //		final TextView nrfConnectItem = container.findViewById(R.id.link_mcp);
 //		if (nrfConnectInfo == null) {
 //			nrfConnectItem.setTextColor(Color.GRAY);
-//			ColorMatrix grayscale = new ColorMatrix();
+//			final ColorMatrix grayscale = new ColorMatrix();
 //			grayscale.setSaturation(0.0f);
 //			nrfConnectItem.getCompoundDrawables()[0].mutate().setColorFilter(new ColorMatrixColorFilter(grayscale));
 //		}
@@ -352,7 +250,7 @@ public class FeaturesActivity extends AppCompatActivity implements SharedPrefere
 //			} catch (final ActivityNotFoundException e) {
 //				Toast.makeText(FeaturesActivity.this, R.string.no_application_play, Toast.LENGTH_SHORT).show();
 //			}
-//			mDrawerLayout.closeDrawers();
+//			drawerLayout.closeDrawers();
 //		});
 //
 //		// look for other plug-ins
@@ -373,7 +271,7 @@ public class FeaturesActivity extends AppCompatActivity implements SharedPrefere
 //				intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 //				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 //				startActivity(intent);
-//				mDrawerLayout.closeDrawers();
+//				drawerLayout.closeDrawers();
 //			});
 //			container.addView(item);
 //		}

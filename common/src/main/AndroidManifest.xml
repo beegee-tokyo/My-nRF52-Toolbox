@@ -21,6 +21,6 @@
   -->
 
 <manifest
-	package="no.nordicsemi.android.max30102.common">
+	package="tk.giesecke.my_nrf52_tb.common">
 
 </manifest>

@@ -26,21 +26,22 @@
 	android:layout_height="wrap_content"
 	android:gravity="center_horizontal"
 	android:orientation="vertical"
-	android:paddingTop="7dp"
-	tools:ignore="ContentDescription" >
+	android:paddingTop="7dp">
 
 	<ImageView
 		android:id="@+id/icon"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_margin="3dp"
-		android:background="@drawable/ic_feature_bg" />
+		android:background="@drawable/ic_feature_bg"
+		tools:src="@drawable/ic_cgms_feature"/>
 
-	<tk.giesecke.my_nrf52_tb.widget.TrebuchetBoldTextView
+	<androidx.appcompat.widget.AppCompatTextView
 		android:id="@+id/label"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:gravity="center"
-		android:textColor="@color/featureTitleColor"/>
+		android:textColor="@color/featureTitleColor"
+		tools:text="CGMS"/>
 
 </LinearLayout>

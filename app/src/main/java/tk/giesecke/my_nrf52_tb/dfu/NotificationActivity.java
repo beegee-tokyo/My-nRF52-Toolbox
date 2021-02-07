@@ -26,8 +26,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import java.util.Objects;
-
 import tk.giesecke.my_nrf52_tb.FeaturesActivity;
 
 public class NotificationActivity extends Activity {
@@ -41,7 +39,8 @@ public class NotificationActivity extends Activity {
 			final Intent parentIntent = new Intent(this, FeaturesActivity.class);
 			parentIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			final Intent startAppIntent = new Intent(this, DfuActivity.class);
-			startAppIntent.putExtras(Objects.requireNonNull(getIntent().getExtras()));
+			if (getIntent() != null && getIntent().getExtras() != null)
+				startAppIntent.putExtras(getIntent().getExtras());
 			startActivities(new Intent[] { parentIntent, startAppIntent });
 		}
 

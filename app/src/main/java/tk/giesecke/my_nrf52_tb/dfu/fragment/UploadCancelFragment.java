@@ -21,14 +21,12 @@
  */
 package tk.giesecke.my_nrf52_tb.dfu.fragment;
 
-import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-
-import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -43,7 +41,7 @@ import tk.giesecke.my_nrf52_tb.dfu.DfuService;
 public class UploadCancelFragment extends DialogFragment {
 	private static final String TAG = "UploadCancelFragment";
 
-	private CancelFragmentListener mListener;
+	private CancelFragmentListener listener;
 
 	public interface CancelFragmentListener {
 		void onCancelUpload();
@@ -54,33 +52,33 @@ public class UploadCancelFragment extends DialogFragment {
 	}
 
 	@Override
-	public void onAttach(final Activity activity) {
-		super.onAttach(activity);
+	public void onAttach(@NonNull final Context context) {
+		super.onAttach(context);
 
 		try {
-			mListener = (CancelFragmentListener) activity;
+			listener = (CancelFragmentListener) context;
 		} catch (final ClassCastException e) {
 			Log.d(TAG, "The parent Activity must implement CancelFragmentListener interface");
 		}
 	}
 
 	@NonNull
-	@Override
+    @Override
 	public Dialog onCreateDialog(final Bundle savedInstanceState) {
-		return new AlertDialog.Builder(Objects.requireNonNull(getActivity())).setTitle(R.string.dfu_confirmation_dialog_title).setMessage(R.string.dfu_upload_dialog_cancel_message).setCancelable(false)
+		return new AlertDialog.Builder(requireContext()).setTitle(R.string.dfu_confirmation_dialog_title).setMessage(R.string.dfu_upload_dialog_cancel_message).setCancelable(false)
 				.setPositiveButton(R.string.yes, (dialog, whichButton) -> {
-					final LocalBroadcastManager manager = LocalBroadcastManager.getInstance(getActivity());
+					final LocalBroadcastManager manager = LocalBroadcastManager.getInstance(requireContext());
 					final Intent pauseAction = new Intent(DfuService.BROADCAST_ACTION);
 					pauseAction.putExtra(DfuService.EXTRA_ACTION, DfuService.ACTION_ABORT);
 					manager.sendBroadcast(pauseAction);
 
-					mListener.onCancelUpload();
+					listener.onCancelUpload();
 				}).setNegativeButton(R.string.no, (dialog, which) -> dialog.cancel()).create();
 	}
 
 	@Override
-	public void onCancel(final DialogInterface dialog) {
-		final LocalBroadcastManager manager = LocalBroadcastManager.getInstance(Objects.requireNonNull(getActivity()));
+	public void onCancel(@NonNull final DialogInterface dialog) {
+		final LocalBroadcastManager manager = LocalBroadcastManager.getInstance(requireContext());
 		final Intent pauseAction = new Intent(DfuService.BROADCAST_ACTION);
 		pauseAction.putExtra(DfuService.EXTRA_ACTION, DfuService.ACTION_RESUME);
 		manager.sendBroadcast(pauseAction);

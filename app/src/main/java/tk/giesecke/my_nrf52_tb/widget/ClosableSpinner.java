@@ -25,9 +25,7 @@ package tk.giesecke.my_nrf52_tb.widget;
 import android.content.Context;
 import android.util.AttributeSet;
 
-import androidx.appcompat.widget.AppCompatSpinner;
-
-public class ClosableSpinner extends AppCompatSpinner {
+public class ClosableSpinner extends androidx.appcompat.widget.AppCompatSpinner {
 	public ClosableSpinner(Context context, AttributeSet attrs) {
 		super(context, attrs);
 	}

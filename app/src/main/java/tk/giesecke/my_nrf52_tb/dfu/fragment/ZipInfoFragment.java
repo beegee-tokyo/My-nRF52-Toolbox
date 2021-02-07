@@ -21,17 +21,14 @@
  */
 package tk.giesecke.my_nrf52_tb.dfu.fragment;
 
-import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.os.Bundle;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.DialogFragment;
+import androidx.appcompat.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 
-import java.util.Objects;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.DialogFragment;
 import tk.giesecke.my_nrf52_tb.R;
 
 public class ZipInfoFragment extends DialogFragment {
@@ -39,7 +36,12 @@ public class ZipInfoFragment extends DialogFragment {
 	@Override
 	@NonNull
 	public Dialog onCreateDialog(final Bundle savedInstanceState) {
-		@SuppressLint("InflateParams") final View view = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_zip_info, null);
-		return new AlertDialog.Builder(Objects.requireNonNull(getActivity())).setView(view).setTitle(R.string.dfu_file_info).setPositiveButton(R.string.ok, null).create();
+		final View view = LayoutInflater.from(requireContext())
+				.inflate(R.layout.fragment_zip_info, null);
+		return new AlertDialog.Builder(requireContext())
+				.setView(view)
+				.setTitle(R.string.dfu_file_info)
+				.setPositiveButton(R.string.ok, null)
+				.create();
 	}
 }

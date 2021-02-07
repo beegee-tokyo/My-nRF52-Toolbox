@@ -21,12 +21,12 @@
   ~ USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:orientation="vertical"
-	tools:context="tk.giesecke.my_nrf52_tb.dfu.DfuActivity"
-	tools:ignore="ContentDescription, RtlSymmetry" >
+	tools:context=".dfu.DfuActivity">
 
 	<include
 		android:id="@+id/toolbar_actionbar"
@@ -39,23 +39,23 @@
 
 		<!-- The size of text below must be fixed, therefore dp are used instead of sp -->
 
-		<tk.giesecke.my_nrf52_tb.widget.TrebuchetBoldTextView
+		<androidx.appcompat.widget.AppCompatTextView
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_centerVertical="true"
-			android:layout_marginStart="@dimen/dfu_feature_title_long_margin"
+			android:layout_marginLeft="@dimen/dfu_feature_title_long_margin"
 			android:rotation="270"
 			android:text="@string/dfu_feature_title_long"
-			android:textColor="@color/darkGray"
-			android:textSize="32sp"
+			android:textColor="@color/verticalTitleColor"
+			android:textSize="32dp"
 			android:textStyle="bold"/>
 
-		<tk.giesecke.my_nrf52_tb.widget.TrebuchetTextView
+		<androidx.appcompat.widget.AppCompatTextView
 			android:id="@+id/device_name"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_centerHorizontal="true"
-			android:layout_marginStart="5dp"
+			android:layout_marginLeft="5dp"
 			android:layout_marginTop="@dimen/feature_device_name_margin_top"
 			android:ellipsize="end"
 			android:freezesText="true"
@@ -71,181 +71,145 @@
 			android:gravity="center_horizontal"
 			android:orientation="vertical">
 
+			<!-- Application section -->
+
 			<LinearLayout
+				style="@style/Widget.List"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:orientation="horizontal"
-				android:weightSum="2"
-				android:baselineAligned="false">
+				android:layout_marginLeft="@dimen/feature_horizontal_margin"
+				android:layout_marginRight="@dimen/feature_horizontal_margin"
+				android:layout_marginTop="@dimen/feature_vertical_margin_top"
+				android:orientation="vertical">
 
-				<!-- Application section -->
-
-				<LinearLayout
-					style="@style/Widget.List"
+				<androidx.appcompat.widget.AppCompatTextView
+					style="@style/Widget.ListTitle"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:layout_marginStart="@dimen/feature_horizontal_margin"
-					android:layout_marginTop="@dimen/feature_vertical_margin_top"
-					android:layout_marginEnd="@dimen/feature_section_padding"
-					android:layout_weight="1"
-					android:orientation="vertical">
+					android:text="@string/dfu_section_application_header"/>
 
-					<tk.giesecke.my_nrf52_tb.widget.TrebuchetBoldTextView
-						style="@style/Widget.ListTitle"
+				<TableLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:padding="@dimen/feature_section_padding">
+
+					<TableRow
 						android:layout_width="match_parent"
-						android:layout_height="wrap_content"
-						android:text="@string/dfu_section_application_header" />
+						android:layout_height="wrap_content">
 
-					<TableLayout
-						android:layout_width="match_parent"
-						android:layout_height="wrap_content"
-						android:padding="@dimen/feature_section_padding">
-
-						<TableRow
-							android:layout_width="match_parent"
-							android:layout_height="wrap_content">
-
-							<tk.giesecke.my_nrf52_tb.widget.TrebuchetTextView
-								android:layout_width="wrap_content"
-								android:layout_height="wrap_content"
-								android:text="@string/dfu_file_name_label" />
-
-							<tk.giesecke.my_nrf52_tb.widget.TrebuchetBoldTextView
-								android:id="@+id/file_name"
-								android:layout_width="wrap_content"
-								android:layout_height="wrap_content"
-								android:layout_marginStart="5dp"
-								android:freezesText="true" />
-						</TableRow>
-
-						<TableRow
-							android:layout_width="match_parent"
-							android:layout_height="wrap_content">
-
-							<tk.giesecke.my_nrf52_tb.widget.TrebuchetTextView
-								android:layout_width="wrap_content"
-								android:layout_height="wrap_content"
-								android:text="@string/dfu_file_type_label" />
-
-							<tk.giesecke.my_nrf52_tb.widget.TrebuchetBoldTextView
-								android:id="@+id/file_type"
-								android:layout_width="wrap_content"
-								android:layout_height="wrap_content"
-								android:layout_marginStart="5dp"
-								android:freezesText="true" />
-						</TableRow>
-
-						<TableRow
-							android:layout_width="match_parent"
-							android:layout_height="wrap_content">
-
-							<tk.giesecke.my_nrf52_tb.widget.TrebuchetTextView
-								android:layout_width="wrap_content"
-								android:layout_height="wrap_content"
-								android:text="@string/dfu_file_scope_label" />
-
-							<tk.giesecke.my_nrf52_tb.widget.TrebuchetBoldTextView
-								android:id="@+id/file_scope"
-								android:layout_width="wrap_content"
-								android:layout_height="wrap_content"
-								android:layout_marginStart="5dp"
-								android:freezesText="true" />
-						</TableRow>
-
-						<TableRow
-							android:layout_width="match_parent"
-							android:layout_height="wrap_content">
-
-							<tk.giesecke.my_nrf52_tb.widget.TrebuchetTextView
-								android:layout_width="wrap_content"
-								android:layout_height="wrap_content"
-								android:text="@string/dfu_file_size_label" />
-
-							<tk.giesecke.my_nrf52_tb.widget.TrebuchetBoldTextView
-								android:id="@+id/file_size"
-								android:layout_width="wrap_content"
-								android:layout_height="wrap_content"
-								android:layout_marginStart="5dp"
-								android:freezesText="true" />
-						</TableRow>
-
-						<TableRow
-							android:layout_width="match_parent"
-							android:layout_height="wrap_content">
-
-							<tk.giesecke.my_nrf52_tb.widget.TrebuchetTextView
-								android:layout_width="wrap_content"
-								android:layout_height="wrap_content"
-								android:text="@string/dfu_file_status_label" />
-
-							<tk.giesecke.my_nrf52_tb.widget.TrebuchetBoldTextView
-								android:id="@+id/file_status"
-								android:layout_width="wrap_content"
-								android:layout_height="wrap_content"
-								android:layout_marginStart="5dp"
-								android:freezesText="true"
-								android:text="@string/dfu_file_status_no_file" />
-						</TableRow>
-					</TableLayout>
-
-					<LinearLayout
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
-						android:layout_marginTop="4dp"
-						android:layout_marginBottom="@dimen/feature_section_padding"
-						android:gravity="center_vertical"
-						android:orientation="horizontal"
-						android:paddingStart="42dp" >
-
-						<Button
-							android:id="@+id/action_select_file"
+						<androidx.appcompat.widget.AppCompatTextView
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
-							android:onClick="onSelectFileClicked"
-							android:text="@string/dfu_action_select_file" />
+							android:text="@string/dfu_file_name_label"/>
 
-						<ImageView
+						<androidx.appcompat.widget.AppCompatTextView
+							android:id="@+id/file_name"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
-							android:layout_marginStart="10dp"
-							android:onClick="onSelectFileHelpClicked"
-							android:src="@drawable/ic_help" />
-					</LinearLayout>
-				</LinearLayout>
+							android:layout_marginLeft="5dp"
+							android:freezesText="true"/>
+					</TableRow>
 
-				<!-- Device section -->
+					<TableRow
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content">
+
+						<androidx.appcompat.widget.AppCompatTextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:text="@string/dfu_file_type_label"/>
+
+						<androidx.appcompat.widget.AppCompatTextView
+							android:id="@+id/file_type"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginLeft="5dp"
+							android:freezesText="true"/>
+					</TableRow>
+
+					<TableRow
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content">
+
+						<androidx.appcompat.widget.AppCompatTextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:text="@string/dfu_file_scope_label"/>
+
+						<androidx.appcompat.widget.AppCompatTextView
+							android:id="@+id/file_scope"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginLeft="5dp"
+							android:freezesText="true"/>
+					</TableRow>
+
+					<TableRow
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content">
+
+						<androidx.appcompat.widget.AppCompatTextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:text="@string/dfu_file_size_label"/>
+
+						<androidx.appcompat.widget.AppCompatTextView
+							android:id="@+id/file_size"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginLeft="5dp"
+							android:freezesText="true"/>
+					</TableRow>
+
+					<TableRow
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content">
+
+						<androidx.appcompat.widget.AppCompatTextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:text="@string/dfu_file_status_label"/>
+
+						<androidx.appcompat.widget.AppCompatTextView
+							android:id="@+id/file_status"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginLeft="5dp"
+							android:freezesText="true"
+							android:text="@string/dfu_file_status_no_file"/>
+					</TableRow>
+				</TableLayout>
 
 				<LinearLayout
-					style="@style/Widget.List"
-					android:layout_width="match_parent"
-					android:layout_height="match_parent"
-					android:layout_marginStart="@dimen/feature_section_padding"
-					android:layout_marginTop="@dimen/feature_vertical_margin_top"
-					android:layout_marginEnd="@dimen/feature_horizontal_margin"
-					android:layout_weight="1"
-					android:orientation="vertical">
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginBottom="@dimen/feature_section_padding"
+					android:layout_marginTop="4dp"
+					android:gravity="center_vertical"
+					android:orientation="horizontal"
+					android:paddingLeft="42dp">
 
-					<tk.giesecke.my_nrf52_tb.widget.TrebuchetBoldTextView
-						style="@style/Widget.ListTitle"
-						android:layout_width="match_parent"
-						android:layout_height="wrap_content"
-						android:text="@string/dfu_section_device_header" />
-
-					<Button
-						android:id="@+id/action_connect"
+					<com.google.android.material.button.MaterialButton
+						android:id="@+id/action_select_file"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:layout_margin="@dimen/feature_section_padding"
-						android:onClick="onConnectClicked"
-						android:text="@string/action_select" />
+						android:onClick="onSelectFileClicked"
+						android:text="@string/dfu_action_select_file"
+						app:backgroundTint="@color/button_color"/>
 
+					<ImageView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginLeft="10dp"
+						android:onClick="onSelectFileHelpClicked"
+						android:src="@drawable/ic_help"/>
 				</LinearLayout>
-
 			</LinearLayout>
 
 			<!-- DFU section -->
 
 			<LinearLayout
+				android:id="@+id/dfu_pane"
 				style="@style/Widget.List"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
@@ -255,22 +219,23 @@
 				android:layout_marginTop="15dp"
 				android:orientation="vertical">
 
-				<tk.giesecke.my_nrf52_tb.widget.TrebuchetBoldTextView
+				<androidx.appcompat.widget.AppCompatTextView
 					style="@style/Widget.ListTitle"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:text="@string/dfu_section_dfu_header"/>
 
-				<Button
+				<com.google.android.material.button.MaterialButton
 					android:id="@+id/action_upload"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_margin="@dimen/feature_section_padding"
 					android:enabled="false"
 					android:onClick="onUploadClicked"
-					android:text="@string/dfu_action_upload"/>
+					android:text="@string/dfu_action_upload"
+					app:backgroundTint="@color/button_color"/>
 
-				<tk.giesecke.my_nrf52_tb.widget.TrebuchetTextView
+				<androidx.appcompat.widget.AppCompatTextView
 					android:id="@+id/textviewUploading"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
@@ -287,7 +252,7 @@
 					android:max="100"
 					android:visibility="invisible"/>
 
-				<tk.giesecke.my_nrf52_tb.widget.TrebuchetTextView
+				<androidx.appcompat.widget.AppCompatTextView
 					android:id="@+id/textviewProgress"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
@@ -298,14 +263,24 @@
 			</LinearLayout>
 
 			<TextView
-				android:id="@+id/libVersion"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:layout_marginEnd="@dimen/feature_horizontal_margin"
-				android:layout_gravity="end"
+				android:layout_gravity="right"
+				android:layout_marginRight="@dimen/feature_horizontal_margin"
 				android:text="@string/dfu_lib_version"
 				android:textSize="12sp"/>
 		</LinearLayout>
+
+		<com.google.android.material.button.MaterialButton
+			android:id="@+id/action_connect"
+			style="@style/Widget.Connect"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignParentBottom="true"
+			android:layout_centerHorizontal="true"
+			android:layout_marginBottom="@dimen/activity_vertical_margin_bottom"
+			android:onClick="onConnectClicked"
+			android:text="@string/action_select"/>
 
 	</tk.giesecke.my_nrf52_tb.widget.ForegroundRelativeLayout>
 </LinearLayout>

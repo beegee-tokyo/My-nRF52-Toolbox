@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+  ~ Copyright (c) 2015, Nordic Semiconductor
+  ~ All rights reserved.
+  ~
+  ~ Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+  ~
+  ~ 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+  ~
+  ~ 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the
+  ~ documentation and/or other materials provided with the distribution.
+  ~
+  ~ 3. Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this
+  ~ software without specific prior written permission.
+  ~
+  ~ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+  ~ LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+  ~ HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+  ~ LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+  ~ ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE
+  ~ USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  -->
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="lora_mode"
+        android:summary="@string/lora_mode_summary"
+        android:title="@string/lora_mode"
+        app:iconSpaceReserved="false" />
+
+    <PreferenceCategory
+        android:title="LPWAN settings"
+        android:key="lpwan_prefs">
+
+        <EditTextPreference
+            android:digits="0123456789ABCDEF"
+            android:inputType="textCapCharacters"
+            android:key="app_eui"
+            android:maxLength="16"
+            android:title="@string/app_eui"
+            app:iconSpaceReserved="false" />
+
+        <EditTextPreference
+            android:digits="0123456789ABCDEF"
+            android:inputType="textCapCharacters"
+            android:key="app_key"
+            android:maxLength="32"
+            android:title="@string/app_key"
+            app:iconSpaceReserved="false" />
+
+        <EditTextPreference
+            android:digits="0123456789ABCDEF"
+            android:inputType="textCapCharacters"
+            android:key="nws_key"
+            android:maxLength="32"
+            android:title="@string/nws_key"
+            app:iconSpaceReserved="false" />
+
+        <EditTextPreference
+            android:digits="0123456789ABCDEF"
+            android:inputType="textCapCharacters"
+            android:key="apps_key"
+            android:maxLength="32"
+            android:title="@string/apps_key"
+            app:iconSpaceReserved="false" />
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="otaa_ena"
+            android:summary="@string/otaa_ena_summary"
+            android:title="@string/otaa_ena"
+            app:iconSpaceReserved="false" />
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="pub_net"
+            android:summary="@string/pub_net_summary"
+            android:title="@string/pub_net"
+            app:iconSpaceReserved="false" />
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="dc_ena"
+            android:summary="@string/dc_ena_summary"
+            android:title="@string/dc_ena"
+            app:iconSpaceReserved="false" />
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="adr_ena"
+            android:summary="@string/adr_ena_summary"
+            android:title="@string/adr_ena"
+            app:iconSpaceReserved="false" />
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="conf_ena"
+            android:summary="@string/conf_ena_summary"
+            android:title="@string/conf_ena"
+            app:iconSpaceReserved="false" />
+
+        <SeekBarPreference
+            android:key="dr_min"
+            android:max="15"
+            android:title="@string/dr_min"
+            app:min="0"
+            app:iconSpaceReserved="false" />
+
+        <SeekBarPreference
+            android:key="tx_power"
+            android:max="15"
+            android:title="@string/tx_power"
+            app:min="0"
+            app:iconSpaceReserved="false" />
+
+        <SeekBarPreference
+            android:key="lora_class"
+            android:max="2"
+            android:title="@string/lora_class"
+            app:min="0"
+            app:iconSpaceReserved="false" />
+
+        <SeekBarPreference
+            android:key="sub_chan"
+            android:max="9"
+            android:title="@string/sub_chan"
+            app:min="0"
+            app:iconSpaceReserved="false" />
+
+        <SeekBarPreference
+            android:key="app_port"
+            android:max="128"
+            android:title="@string/app_port"
+            app:min="0"
+            app:iconSpaceReserved="false" />
+
+        <SeekBarPreference
+            android:key="nb_trials"
+            android:max="12"
+            android:title="@string/nb_trials"
+            app:min="1"
+            app:iconSpaceReserved="false" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="LoRa P2P settings"
+        android:key="p2p_prefs" >
+
+        <EditTextPreference
+            android:digits="0123456789,"
+            android:inputType="textCapCharacters"
+            android:key="p2p_freq"
+            android:maxLength="32"
+            android:title="@string/p2p_frequency"
+            app:iconSpaceReserved="false" />
+
+        <SeekBarPreference
+            android:key="p2p_txpower"
+            android:max="15"
+            android:title="@string/tx_power"
+            app:min="0"
+            app:iconSpaceReserved="false" />
+
+        <ListPreference
+            android:entries="@array/lora_p2p_bw"
+            android:entryValues="@array/lora_p2p_bw_values"
+            android:key="p2p_bw"
+            android:title="@string/p2p_bw"
+            app:min="0"
+            app:iconSpaceReserved="false" />
+
+        <SeekBarPreference
+            android:key="p2p_sf"
+            android:max="12"
+            android:title="@string/p2p_sf_sett"
+            app:min="7"
+            app:iconSpaceReserved="false" />
+
+        <ListPreference
+            android:entries="@array/lora_p2p_cr"
+            android:entryValues="@array/lora_p2p_cr_values"
+            android:key="p2p_cr"
+            android:title="@string/p2p_cr_sett"
+            app:min="0"
+            app:iconSpaceReserved="false" />
+
+        <SeekBarPreference
+            android:key="p2p_pre"
+            android:max="16"
+            android:title="@string/p2p_pre_len_sett"
+            app:min="1"
+            app:iconSpaceReserved="false" />
+
+        <EditTextPreference
+            android:digits="0123456789"
+            android:inputType="numberDecimal"
+            android:key="p2p_timeout"
+            android:title="@string/p2p_sym_timeout_sett"
+            app:iconSpaceReserved="false" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

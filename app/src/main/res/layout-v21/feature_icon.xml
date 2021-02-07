@@ -21,13 +21,12 @@
   ~ USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="wrap_content"
 	android:layout_height="wrap_content"
-	xmlns:tools="http://schemas.android.com/tools"
 	android:gravity="center_horizontal"
 	android:orientation="vertical"
-	android:paddingTop="7dp"
-	tools:ignore="ContentDescription">
+	android:paddingTop="7dp">
 
 	<ImageView
 		android:id="@+id/icon"
@@ -36,13 +35,15 @@
 		android:layout_margin="3dp"
 		android:background="@drawable/ic_feature_bg"
 		android:elevation="3dp"
-		android:stateListAnimator="@animator/click_animator"/>
+		android:stateListAnimator="@animator/click_animator"
+		tools:src="@drawable/ic_cgms_feature"/>
 
-	<tk.giesecke.my_nrf52_tb.widget.TrebuchetBoldTextView
+	<androidx.appcompat.widget.AppCompatTextView
 		android:id="@+id/label"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:gravity="center"
-		android:textColor="@color/featureTitleColor"/>
+		android:textColor="@color/featureTitleColor"
+		tools:text="CGMS"/>
 
 </LinearLayout>

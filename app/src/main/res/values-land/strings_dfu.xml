@@ -21,6 +21,6 @@
   ~ USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   -->
 <resources>
-    <string name="dfu_feature_title_long">UPDATE</string>
+    <string name="dfu_feature_title_long">DFU</string>
     <dimen name="dfu_feature_title_long_margin">-16dp</dimen>
 </resources>
