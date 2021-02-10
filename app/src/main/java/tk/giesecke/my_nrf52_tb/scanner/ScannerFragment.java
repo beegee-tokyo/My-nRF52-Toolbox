@@ -197,16 +197,13 @@ public class ScannerFragment extends DialogFragment {
 
 	@Override
 	public void onRequestPermissionsResult(final int requestCode, final @NonNull String[] permissions, final @NonNull int[] grantResults) {
-		switch (requestCode) {
-			case REQUEST_PERMISSION_REQ_CODE: {
-				if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-					// We have been granted the Manifest.permission.ACCESS_FINE_LOCATION permission. Now we may proceed with scanning.
-					startScan();
-				} else {
-					permissionRationale.setVisibility(View.VISIBLE);
-					Toast.makeText(getActivity(), R.string.no_required_permission, Toast.LENGTH_SHORT).show();
-				}
-				break;
+		if (requestCode == REQUEST_PERMISSION_REQ_CODE) {
+			if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+				// We have been granted the Manifest.permission.ACCESS_FINE_LOCATION permission. Now we may proceed with scanning.
+				startScan();
+			} else {
+				permissionRationale.setVisibility(View.VISIBLE);
+				Toast.makeText(getActivity(), R.string.no_required_permission, Toast.LENGTH_SHORT).show();
 			}
 		}
 	}
@@ -268,7 +265,7 @@ public class ScannerFragment extends DialogFragment {
 		}
 	}
 
-	private ScanCallback scanCallback = new ScanCallback() {
+	private final ScanCallback scanCallback = new ScanCallback() {
 		@Override
 		public void onScanResult(final int callbackType, @NonNull final ScanResult result) {
 			// do nothing

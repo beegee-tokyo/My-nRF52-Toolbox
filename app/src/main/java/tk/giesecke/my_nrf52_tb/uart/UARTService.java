@@ -30,15 +30,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.os.Build;
 import android.text.TextUtils;
-import android.util.Log;
-
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.wearable.MessageApi;
-import com.google.android.gms.wearable.Node;
-import com.google.android.gms.wearable.NodeApi;
-import com.google.android.gms.wearable.Wearable;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
@@ -181,8 +173,7 @@ public class UARTService extends BleProfileService implements UARTManagerCallbac
      * Sets the service as a foreground service
      */
     private void startForegroundService() {
-        return;
-//        // when the activity closes we need to show the notification that user is connected to the peripheral sensor
+        //        // when the activity closes we need to show the notification that user is connected to the peripheral sensor
 //        // We start the service as a foreground service as Android 8.0 (Oreo) onwards kills any running background services
 //        final Notification notification = createNotification(R.string.uart_notification_connected_message, 0);
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -197,8 +188,7 @@ public class UARTService extends BleProfileService implements UARTManagerCallbac
      * Stops the service as a foreground service
      */
     private void stopForegroundService() {
-        return;
-//        // when the activity rebinds to the service, remove the notification and stop the foreground service
+        //        // when the activity rebinds to the service, remove the notification and stop the foreground service
 //        // on devices running Android 8.0 (Oreo) or above
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 //            stopForeground(true);
@@ -270,7 +260,7 @@ public class UARTService extends BleProfileService implements UARTManagerCallbac
      * Broadcast receiver that listens for {@link #ACTION_SEND} from other apps. Sends the String or int content of the {@link Intent#EXTRA_TEXT} extra to the remote device.
      * The integer content will be sent as String (65 -> "65", not 65 -> "A").
      */
-    private BroadcastReceiver intentBroadcastReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver intentBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(final Context context, final Intent intent) {
             final boolean hasMessage = intent.hasExtra(Intent.EXTRA_TEXT);

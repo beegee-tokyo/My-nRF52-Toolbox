@@ -26,7 +26,8 @@
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:orientation="vertical"
-	tools:context=".dfu.DfuActivity">
+	tools:context=".dfu.DfuActivity"
+	tools:ignore="UsingOnClickInXml, RtlHardCoded, RtlSymmetry, ContentDescription">
 
 	<include
 		android:id="@+id/toolbar_actionbar"
@@ -47,7 +48,7 @@
 			android:rotation="270"
 			android:text="@string/dfu_feature_title_long"
 			android:textColor="@color/verticalTitleColor"
-			android:textSize="32dp"
+			android:textSize="32sp"
 			android:textStyle="bold"/>
 
 		<androidx.appcompat.widget.AppCompatTextView
@@ -195,7 +196,7 @@
 						android:layout_height="wrap_content"
 						android:onClick="onSelectFileClicked"
 						android:text="@string/dfu_action_select_file"
-						app:backgroundTint="@color/button_color"/>
+						app:backgroundTint="@color/button_color" />
 
 					<ImageView
 						android:layout_width="wrap_content"
@@ -203,6 +204,7 @@
 						android:layout_marginLeft="10dp"
 						android:onClick="onSelectFileHelpClicked"
 						android:src="@drawable/ic_help"/>
+
 				</LinearLayout>
 			</LinearLayout>
 

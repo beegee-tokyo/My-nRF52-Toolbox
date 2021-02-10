@@ -26,7 +26,8 @@
 	android:layout_height="wrap_content"
 	android:gravity="center_horizontal"
 	android:orientation="vertical"
-	android:paddingTop="7dp">
+	android:paddingTop="7dp"
+	tools:ignore="UsingOnClickInXml, RtlHardCoded, RtlSymmetry, ContentDescription">
 
 	<ImageView
 		android:id="@+id/icon"
@@ -36,7 +37,7 @@
 		android:background="@drawable/ic_feature_bg"
 		android:elevation="3dp"
 		android:stateListAnimator="@animator/click_animator"
-		tools:src="@drawable/ic_cgms_feature"/>
+		tools:src="@drawable/ic_esp32_feature"/>
 
 	<androidx.appcompat.widget.AppCompatTextView
 		android:id="@+id/label"
@@ -44,6 +45,6 @@
 		android:layout_height="wrap_content"
 		android:gravity="center"
 		android:textColor="@color/featureTitleColor"
-		tools:text="CGMS"/>
+		tools:text=" "/>
 
 </LinearLayout>

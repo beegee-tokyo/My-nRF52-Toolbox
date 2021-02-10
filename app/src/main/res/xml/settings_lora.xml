@@ -34,7 +34,7 @@
         android:title="LPWAN settings"
         android:key="lpwan_prefs">
 
-        <EditTextPreference
+        <androidx.preference.EditTextPreference
             android:digits="0123456789ABCDEF"
             android:inputType="textCapCharacters"
             android:key="app_eui"

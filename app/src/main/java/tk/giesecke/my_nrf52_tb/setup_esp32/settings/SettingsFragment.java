@@ -24,7 +24,6 @@ package tk.giesecke.my_nrf52_tb.setup_esp32.settings;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceFragment;
 
 import androidx.preference.PreferenceFragmentCompat;
 import tk.giesecke.my_nrf52_tb.R;

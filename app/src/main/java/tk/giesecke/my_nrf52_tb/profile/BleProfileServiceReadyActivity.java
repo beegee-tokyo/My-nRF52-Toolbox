@@ -24,7 +24,6 @@ package tk.giesecke.my_nrf52_tb.profile;
 import android.app.Service;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothManager;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -170,7 +169,7 @@ public abstract class BleProfileServiceReadyActivity<E extends BleProfileService
 		}
 	};
 
-	private ServiceConnection serviceConnection = new ServiceConnection() {
+	private final ServiceConnection serviceConnection = new ServiceConnection() {
 		@SuppressWarnings("unchecked")
 		@Override
 		public void onServiceConnected(final ComponentName name, final IBinder service) {
@@ -467,6 +466,7 @@ public abstract class BleProfileServiceReadyActivity<E extends BleProfileService
 	 *
 	 * @return local log session content provider URI
 	 */
+	@SuppressWarnings("SameReturnValue")
 	protected Uri getLocalAuthorityLogger() {
 		return null;
 	}

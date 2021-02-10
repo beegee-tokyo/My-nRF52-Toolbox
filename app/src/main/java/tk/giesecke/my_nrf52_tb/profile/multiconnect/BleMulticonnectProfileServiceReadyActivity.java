@@ -164,7 +164,7 @@ public abstract class BleMulticonnectProfileServiceReadyActivity<E extends BleMu
 		}
 	};
 
-	private ServiceConnection serviceConnection = new ServiceConnection() {
+	private final ServiceConnection serviceConnection = new ServiceConnection() {
 		@SuppressWarnings("unchecked")
 		@Override
 		public void onServiceConnected(final ComponentName name, final IBinder service) {
@@ -297,6 +297,7 @@ public abstract class BleMulticonnectProfileServiceReadyActivity<E extends BleMu
 	/**
 	 * You may do some initialization here. This method is called from {@link #onCreate(Bundle)} before the view was created.
 	 */
+	@SuppressWarnings("EmptyMethod")
 	protected void onInitialize(final Bundle savedInstanceState) {
 		// empty default implementation
 	}
@@ -316,6 +317,7 @@ public abstract class BleMulticonnectProfileServiceReadyActivity<E extends BleMu
 	 * @param savedInstanceState contains the data it most recently supplied in {@link #onSaveInstanceState(Bundle)}.
 	 *                           Note: <b>Otherwise it is null</b>.
 	 */
+	@SuppressWarnings("EmptyMethod")
 	protected void onViewCreated(@SuppressWarnings("unused") final Bundle savedInstanceState) {
 		// empty default implementation
 	}

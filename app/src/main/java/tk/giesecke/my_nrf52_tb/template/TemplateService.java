@@ -70,6 +70,7 @@ public class TemplateService extends BleProfileService implements TemplateManage
          *
          * @param parameter some parameter.
          */
+        @SuppressWarnings("SameParameterValue")
         void performAction(final String parameter) {
             manager.performAction(parameter);
         }
@@ -82,7 +83,7 @@ public class TemplateService extends BleProfileService implements TemplateManage
 
     @Override
     protected LoggableBleManager<TemplateManagerCallbacks> initializeManager() {
-        return manager = new TemplateManager(this);
+        return manager =  new TemplateManager(this);
     }
 
     @Override

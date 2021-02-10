@@ -26,7 +26,8 @@
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:orientation="vertical"
-	tools:context=".dfu.DfuActivity">
+	tools:context=".dfu.DfuActivity"
+	tools:ignore="UsingOnClickInXml, RtlHardCoded, RtlSymmetry, ContentDescription">
 
 	<include
 		android:id="@+id/toolbar_actionbar"
@@ -47,7 +48,7 @@
 			android:rotation="270"
 			android:text="@string/dfu_feature_title_long"
 			android:textColor="@color/verticalTitleColor"
-			android:textSize="32dp"
+			android:textSize="32sp"
 			android:textStyle="bold"/>
 
 		<androidx.appcompat.widget.AppCompatTextView
@@ -276,7 +277,7 @@
 			android:layout_alignRight="@+id/dfu_container"
 			android:layout_below="@+id/dfu_container"
 			android:text="@string/dfu_lib_version"
-			android:textSize="12dp"/>
+			android:textSize="12sp"/>
 
 		<com.google.android.material.button.MaterialButton
 			android:id="@+id/action_connect"

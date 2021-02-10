@@ -33,7 +33,7 @@
     <string name="hidePW">Hide Passwords</string>
     <string name="showFCM">Show FCM devices</string>
 
-    <string name="esp32_about_text">Used to setup WiFi connection for ESP32 module.</string>
+    <string name="esp32_about_text">Setup WiFi connection for ESP32 module.</string>
     <string-array name="region_list">
         <item>EU 868</item>
         <item>US 915</item>

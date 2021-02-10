@@ -44,7 +44,7 @@ public abstract class BatteryManager<T extends BatteryManagerCallbacks> extends 
 		super(context);
 	}
 
-	private DataReceivedCallback batteryLevelDataCallback = new BatteryLevelDataCallback() {
+	private final DataReceivedCallback batteryLevelDataCallback = new BatteryLevelDataCallback() {
 		@Override
 		public void onBatteryLevelChanged(@NonNull final BluetoothDevice device,
 										  @IntRange(from = 0, to = 100) final int batteryLevel) {

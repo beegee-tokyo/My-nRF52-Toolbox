@@ -30,7 +30,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.os.Build;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
@@ -137,8 +136,7 @@ public class ESP32Service extends BleProfileService implements ESP32ManagerCallb
      * Sets the service as a foreground service
      */
     private void startForegroundService(){
-        return;
-//        // when the activity closes we need to show the notification that user is connected to the peripheral sensor
+        //        // when the activity closes we need to show the notification that user is connected to the peripheral sensor
 //        // We start the service as a foreground service as Android 8.0 (Oreo) onwards kills any running background services
 //        final Notification notification = createNotification(R.string.template_notification_connected_message, 0);
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -153,8 +151,7 @@ public class ESP32Service extends BleProfileService implements ESP32ManagerCallb
      * Stops the service as a foreground service
      */
     private void stopForegroundService(){
-        return;
-//        // when the activity rebinds to the service, remove the notification and stop the foreground service
+        //        // when the activity rebinds to the service, remove the notification and stop the foreground service
 //        // on devices running Android 8.0 (Oreo) or above
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 //            stopForeground(true);

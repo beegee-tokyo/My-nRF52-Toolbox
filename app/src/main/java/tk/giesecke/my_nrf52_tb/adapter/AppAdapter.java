@@ -114,7 +114,7 @@ public class AppAdapter extends BaseAdapter {
 		return view;
 	}
 
-	private class ViewHolder {
+	private static class ViewHolder {
 		private View view;
 		private ImageView icon;
 		private TextView label;

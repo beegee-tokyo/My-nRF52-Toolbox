@@ -23,7 +23,6 @@
 package tk.giesecke.my_nrf52_tb.template.settings;
 
 import android.os.Bundle;
-import android.preference.PreferenceFragment;
 
 import androidx.preference.PreferenceFragmentCompat;
 import tk.giesecke.my_nrf52_tb.R;

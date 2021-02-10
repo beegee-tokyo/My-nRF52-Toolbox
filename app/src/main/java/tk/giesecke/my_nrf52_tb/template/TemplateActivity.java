@@ -105,12 +105,10 @@ public class TemplateActivity extends BleProfileServiceReadyActivity<TemplateSer
 
 	@Override
 	protected boolean onOptionsItemSelected(final int itemId) {
-		switch (itemId) {
-			case R.id.action_settings:
-				final Intent intent = new Intent(this, SettingsActivity.class);
-				startActivity(intent);
-				break;
-		}
+        if (itemId == R.id.action_settings) {
+            final Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
+        }
 		return true;
 	}
 

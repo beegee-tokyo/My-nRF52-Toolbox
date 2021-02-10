@@ -33,7 +33,7 @@ public class ExtendedBluetoothDevice {
 	/** The name is not parsed by some Android devices, f.e. Sony Xperia Z1 with Android 4.3 (C6903). It needs to be parsed manually. */
 	public String name;
 	public int rssi;
-	public boolean isBonded;
+	public final boolean isBonded;
 
 	public ExtendedBluetoothDevice(@NonNull final ScanResult scanResult) {
 		this.device = scanResult.getDevice();

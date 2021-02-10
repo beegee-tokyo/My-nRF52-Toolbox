@@ -2,12 +2,18 @@
 <resources xmlns:tools="http://schemas.android.com/tools"
     tools:ignore="TypographyDashes">
     <string name="lora_feature_title">LPWAN setup</string>
-    <string name="lora_about_text">Used to setup LoRa/LPWAN devices with their credentials and parameters.</string>
+    <string name="lora_about_text">Setup LoRa/LPWAN devices with their credentials and parameters.\nA prepared settings file in JSON format can be loaded from the device on the path \"\\Internal storage\\Android\\data\\tk.giesecke.my_nrf52_tb\\files\\lora_config.txt\"</string>
 
     <string name="lora_write_button">Send config</string>
     <string name="lora_read_button">Get config</string>
     <string name="lora_erase_button">Erase config</string>
     <string name="lora_reset_button">Reset node</string>
+    <string name="lora_qr_button">QR</string>
+    <string name="lora_load_config">Read Cfg File</string>
+    <string name="lora_save_config">Save Cfg File</string>
+    <string name="lora_update_prefs">Get Preferences</string>
+    <string name="lora_read_config_fail">Error Reading Configuration File</string>
+    <string name="lora_save_config_fail">Error Saving Configuration File</string>
 
     <!-- Text input -->
     <string name="lora_mode">LPWAN</string>

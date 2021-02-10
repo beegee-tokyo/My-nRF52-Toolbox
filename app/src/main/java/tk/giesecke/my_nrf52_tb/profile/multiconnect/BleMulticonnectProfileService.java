@@ -300,7 +300,8 @@ public abstract class BleMulticonnectProfileService extends Service implements B
 	 * This method is not called when the activity was killed to be recreated when the phone orientation changed
 	 * if prior to being killed called {@link LocalBinder#setActivityIsChangingConfiguration(boolean)} with parameter true.
 	 */
-	protected void onRebind() {
+	@SuppressWarnings("EmptyMethod")
+    protected void onRebind() {
 		// empty default implementation
 	}
 
@@ -325,6 +326,7 @@ public abstract class BleMulticonnectProfileService extends Service implements B
 	 * Called when the activity has unbound from the service before being finished.
 	 * This method is not called when the activity is killed to be recreated when the phone orientation changed.
 	 */
+	@SuppressWarnings("EmptyMethod")
 	protected void onUnbind() {
 		// empty default implementation
 	}
@@ -355,6 +357,7 @@ public abstract class BleMulticonnectProfileService extends Service implements B
 	/**
 	 * Called when the service has been created, before the {@link #onBluetoothEnabled()} is called.
 	 */
+	@SuppressWarnings("EmptyMethod")
 	protected void onServiceCreated() {
 		// empty default implementation
 	}
@@ -377,6 +380,7 @@ public abstract class BleMulticonnectProfileService extends Service implements B
 	/**
 	 * Called when the service has been started.
 	 */
+	@SuppressWarnings("EmptyMethod")
 	protected void onServiceStarted() {
 		// empty default implementation
 	}
@@ -419,6 +423,7 @@ public abstract class BleMulticonnectProfileService extends Service implements B
 	/**
 	 * Method called when Bluetooth Adapter has been disabled.
 	 */
+	@SuppressWarnings("EmptyMethod")
 	protected void onBluetoothDisabled() {
 		// do nothing, BleManagers have their own Bluetooth State broadcast received and will close themselves
 	}

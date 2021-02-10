@@ -53,7 +53,7 @@ import static tk.giesecke.my_nrf52_tb.setup_esp32.XorCoding.xorCode;
  */
 public class ESP32Manager extends BatteryManager<ESP32ManagerCallbacks> {
 
-	static String TAG = "ESP32_MAN";
+	static final String TAG = "ESP32_MAN";
 	/**
 	 * The service UUID.
 	 */

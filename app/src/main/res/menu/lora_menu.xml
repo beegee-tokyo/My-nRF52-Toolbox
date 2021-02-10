@@ -1,0 +1,41 @@
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:ignore="AlwaysShowAction" >
+
+     <item
+        android:id="@+id/connect"
+        android:icon="@drawable/ic_action_bluetooth"
+        android:orderInCategory="100"
+        android:title="@string/action_connect"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/load"
+        android:icon="@drawable/ic_action_bluetooth"
+        android:orderInCategory="100"
+        android:title="@string/lora_load_config"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/save"
+        android:icon="@drawable/ic_action_bluetooth"
+        android:orderInCategory="100"
+        android:title="@string/lora_save_config"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/get"
+        android:icon="@drawable/ic_action_bluetooth"
+        android:orderInCategory="100"
+        android:title="@string/lora_update_prefs"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_about"
+        android:icon="@android:drawable/ic_menu_help"
+        android:orderInCategory="100"
+        android:title="@string/action_about"
+        app:showAsAction="never" />
+
+</menu>

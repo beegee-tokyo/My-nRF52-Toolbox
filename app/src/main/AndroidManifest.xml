@@ -114,9 +114,6 @@
 				<category android:name="tk.giesecke.my_nrf52_tb.LAUNCHER" />
 			</intent-filter>
 		</activity>
-		<activity
-			android:name="tk.giesecke.my_nrf52_tb.setup_lora.settings.SettingsActivity"
-			android:label="@string/lora_feature_title" />
 		<service
 			android:name="tk.giesecke.my_nrf52_tb.setup_lora.LoRaService"
 			android:label="@string/lora_feature_title" />
@@ -174,7 +171,7 @@
 
 		<service
 			android:name="tk.giesecke.my_nrf52_tb.dfu.DfuService"
-			android:exported="true"
+			android:exported="false"
 			android:label="@string/dfu_service_title" >
 			<intent-filter>
 				<action android:name="no.nordicsemi.android.action.DFU_UPLOAD" />

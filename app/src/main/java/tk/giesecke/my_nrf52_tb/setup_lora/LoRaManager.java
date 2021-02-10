@@ -36,12 +36,8 @@ import android.util.Log;
 import java.util.UUID;
 
 import no.nordicsemi.android.ble.BleManager;
-import no.nordicsemi.android.ble.BleManagerCallbacks;
 import no.nordicsemi.android.ble.data.Data;
-import no.nordicsemi.android.log.LogContract;
 import tk.giesecke.my_nrf52_tb.battery.BatteryManager;
-import tk.giesecke.my_nrf52_tb.parser.TemplateParser;
-import tk.giesecke.my_nrf52_tb.profile.LoggableBleManager;
 import tk.giesecke.my_nrf52_tb.setup_lora.callback.LoRaDataCallback;
 
 import static java.lang.Math.abs;
@@ -55,7 +51,7 @@ import static tk.giesecke.my_nrf52_tb.setup_lora.LoRaService.EXTRA_DATA;
  */
 public class LoRaManager extends BatteryManager<LoRaManagerCallbacks> {
 
-    static String TAG = "LR_SETT";
+    static final String TAG = "LR_SETT";
     /**
      * The LoRa service UUID.
      */

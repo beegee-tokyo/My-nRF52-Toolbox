@@ -20,7 +20,9 @@
   ~ ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE
   ~ USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   -->
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools"
+	tools:ignore="ButtonCase">
+
 	<string name="dfu_feature_title">DFU</string>
 	<string name="dfu_service_title">nRF Toolbox DFU Proxy</string>
 	<string name="dfu_settings_title">DFU Settings</string>
@@ -64,7 +66,7 @@
 	
 	<string name="dfu_section_dfu_header">DEVICE FIRMWARE UPDATE</string>
 	<string name="dfu_action_upload">UPLOAD</string>
-	<string name="dfu_action_upload_cancel">CANCEL</string>
+	<string name="dfu_action_upload_cancel" >CANCEL</string>
 	
 	<string name="dfu_settings_dfu">DFU options</string>
 	<string name="dfu_settings_dfu_packets_receipt_notification_label">Packets receipt notification procedure</string>

@@ -21,7 +21,6 @@
  */
 package tk.giesecke.my_nrf52_tb.setup_lora;
 
-import no.nordicsemi.android.ble.BleManagerCallbacks;
 import tk.giesecke.my_nrf52_tb.battery.BatteryManagerCallbacks;
 import tk.giesecke.my_nrf52_tb.setup_lora.callback.LoRaCharacteristicCallback;
 

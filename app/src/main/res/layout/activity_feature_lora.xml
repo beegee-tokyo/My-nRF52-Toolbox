@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="tk.giesecke.my_nrf52_tb.setup_lora.LoRaActivity"
-    tools:ignore="Autofill, LabelFor, TooManyViews">
+    tools:ignore="Autofill, LabelFor, TooManyViews, UsingOnClickInXml">
 
     <include
         android:id="@+id/toolbar_actionbar"
@@ -23,6 +23,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:id="@+id/center"
+            android:layout_centerInParent="true"/>
+
         <TextView
             android:id="@+id/device_name"
             android:layout_width="wrap_content"
@@ -33,96 +39,93 @@
             android:gravity="center"
             android:text="@string/scanner_default_name" />
 
-        <TableLayout
-            android:id="@+id/buttons"
+        <CheckBox
+            android:id="@+id/lora_mode"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/lora_eraseBT"
+            android:text="@string/lora_mode" />
+
+        <CheckBox
+            android:id="@+id/lora_join"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/lora_mode"
+            android:text="@string/join_ena" />
+
+        <TextView
+            android:id="@+id/lora_send_repeat_f"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/lora_join"
+            android:layout_alignBottom="@id/lora_send_repeat"
             android:layout_alignParentStart="true"
-            android:layout_margin="5dp">
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:gravity="center_vertical"
+            android:text="@string/tx_repeat" />
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+        <NumberPicker
+            android:id="@+id/lora_send_repeat"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:layout_below="@id/lora_join"
+            android:layout_toEndOf="@id/lora_send_repeat_f"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/lora_readBT"
-                    style="@style/Widget.MyButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="1dp"
-                    android:layout_weight="1"
-                    android:enabled="false"
-                    android:onClick="onClickLoRaRead"
-                    android:text="@string/lora_read_button"
-                    android:textColor="@android:color/holo_blue_dark"
-                    android:textStyle="bold" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/lora_readBT"
+            style="@style/Widget.MyButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@id/center"
+            android:layout_margin="1dp"
+            android:layout_marginStart="30dp"
+            android:layout_weight="1"
+            android:enabled="false"
+            android:onClick="onClickLoRaRead"
+            android:text="@string/lora_read_button"
+            android:textColor="@android:color/holo_blue_dark"
+            android:textStyle="bold" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/lora_writeBT"
-                    style="@style/Widget.MyButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="1dp"
-                    android:layout_weight="1"
-                    android:enabled="false"
-                    android:onClick="onClickLoRaWrite"
-                    android:text="@string/lora_write_button"
-                    android:textColor="@android:color/holo_green_dark"
-                    android:textStyle="bold" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/lora_writeBT"
+            style="@style/Widget.MyButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@id/center"
+            android:layout_below="@id/lora_readBT"
+            android:layout_margin="1dp"
+            android:layout_weight="1"
+            android:enabled="false"
+            android:onClick="onClickLoRaWrite"
+            android:text="@string/lora_write_button"
+            android:textColor="@android:color/holo_green_dark"
+            android:textStyle="bold" />
 
-            </TableRow>
-
-            <TableRow
-                android:id="@+id/lower_buttons"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <CheckBox
-                        android:id="@+id/lora_mode"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/lora_mode" />
-
-                    <CheckBox
-                        android:id="@+id/lora_join"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/join_ena" />
-
-                </LinearLayout>
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/lora_resetBT"
-                    style="@style/Widget.MyButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="1dp"
-                    android:layout_weight="1"
-                    android:enabled="false"
-                    android:onClick="onClickLoRaReset"
-                    android:text="@string/lora_reset_button"
-                    android:textColor="@android:color/holo_orange_dark"
-                    android:textStyle="bold" />
-
-            </TableRow>
-
-        </TableLayout>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/lora_resetBT"
+            style="@style/Widget.MyButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@id/center"
+            android:layout_below="@id/lora_writeBT"
+            android:layout_margin="1dp"
+            android:layout_weight="1"
+            android:enabled="false"
+            android:onClick="onClickLoRaReset"
+            android:text="@string/lora_reset_button"
+            android:textColor="@android:color/holo_orange_dark"
+            android:textStyle="bold" />
 
         <ScrollView
             android:id="@+id/lora_lorawan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/buttons"
+            android:layout_below="@+id/lora_send_repeat"
             android:layout_alignParentStart="true"
-            android:visibility="visible"
-            android:layout_margin="5dp">
+            android:layout_margin="5dp"
+            android:visibility="visible">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -141,17 +144,31 @@
                     android:id="@+id/lora_dev_eui"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
+                    android:layout_toStartOf="@id/lora_qrDevEuiBt"
                     android:layout_toEndOf="@id/tv_deveui"
                     android:digits="0123456789ABCDEF"
                     android:inputType="textCapCharacters"
                     android:maxLength="16" />
 
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/lora_qrDevEuiBt"
+                    style="@style/Widget.MyButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_margin="1dp"
+                    android:enabled="false"
+                    android:onClick="onClickQrRead"
+                    android:text="@string/lora_qr_button"
+                    android:textColor="@android:color/holo_orange_dark"
+                    android:textStyle="bold"
+                    tools:ignore="UsingOnClickInXml" />
+
                 <TextView
                     android:id="@+id/tv_appeui"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/lora_dev_eui"
+                    android:layout_below="@id/lora_qrDevEuiBt"
                     android:layout_alignTop="@id/lora_app_eui"
                     android:layout_alignBottom="@id/lora_app_eui"
                     android:gravity="center_vertical"
@@ -161,7 +178,7 @@
                     android:id="@+id/lora_app_eui"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/lora_dev_eui"
+                    android:layout_below="@id/lora_qrDevEuiBt"
                     android:layout_toEndOf="@id/tv_deveui"
                     android:digits="0123456789ABCDEF"
                     android:inputType="textCapCharacters"
@@ -278,14 +295,6 @@
                     android:layout_below="@id/lora_otaa"
                     android:text="@string/adr_ena" />
 
-<!--                <CheckBox-->
-<!--                    android:id="@+id/lora_join"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_below="@id/lora_otaa"-->
-<!--                    android:layout_toEndOf="@+id/lora_otaa"-->
-<!--                    android:text="@string/join_ena" />-->
-
                 <CheckBox
                     android:id="@+id/lora_conf_msg"
                     android:layout_width="wrap_content"
@@ -310,13 +319,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/lora_adr"
+                    android:layout_alignBottom="@id/lora_datarate_f"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="10dp"
                     android:layout_toEndOf="@id/lora_nb_trials_f"
                     android:gravity="center"
                     android:text="@string/lora_dr_0"
-                    android:layout_alignBottom="@id/lora_datarate_f"
                     android:textAlignment="center" />
 
                 <SeekBar
@@ -324,9 +333,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/lora_adr"
+                    android:layout_alignBottom="@id/lora_datarate_f"
                     android:layout_alignParentEnd="true"
                     android:layout_toEndOf="@id/lora_nb_trials_num"
-                    android:layout_alignBottom="@id/lora_datarate_f"
                     android:max="15" />
 
                 <TextView
@@ -345,13 +354,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/lora_datarate_f"
+                    android:layout_alignBottom="@id/lora_tx_pwr_f"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="10dp"
                     android:layout_toEndOf="@id/lora_nb_trials_f"
                     android:gravity="center"
                     android:text="@string/lora_dr_0"
-                    android:layout_alignBottom="@id/lora_tx_pwr_f"
                     android:textAlignment="center" />
 
                 <SeekBar
@@ -359,9 +368,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/lora_datarate_f"
+                    android:layout_alignBottom="@id/lora_tx_pwr_f"
                     android:layout_alignParentEnd="true"
                     android:layout_toEndOf="@id/lora_nb_trials_num"
-                    android:layout_alignBottom="@id/lora_tx_pwr_f"
                     android:max="15" />
 
                 <TextView
@@ -380,13 +389,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/lora_tx_pwr_f"
+                    android:layout_alignBottom="@id/lora_class_f"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="10dp"
                     android:layout_toEndOf="@id/lora_nb_trials_f"
                     android:gravity="center"
                     android:text="@string/lora_dr_0"
-                    android:layout_alignBottom="@id/lora_class_f"
                     android:textAlignment="center" />
 
                 <SeekBar
@@ -394,9 +403,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/lora_tx_pwr_f"
+                    android:layout_alignBottom="@id/lora_class_f"
                     android:layout_alignParentEnd="true"
                     android:layout_toEndOf="@id/lora_nb_trials_num"
-                    android:layout_alignBottom="@id/lora_class_f"
                     android:max="2" />
 
                 <TextView
@@ -415,13 +424,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/lora_class_f"
+                    android:layout_alignBottom="@id/lora_subband_f"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="10dp"
                     android:layout_toEndOf="@id/lora_nb_trials_f"
                     android:gravity="center"
                     android:text="@string/lora_dr_0"
-                    android:layout_alignBottom="@id/lora_subband_f"
                     android:textAlignment="center" />
 
                 <SeekBar
@@ -429,9 +438,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/lora_class_f"
+                    android:layout_alignBottom="@id/lora_subband_f"
                     android:layout_alignParentEnd="true"
                     android:layout_toEndOf="@id/lora_nb_trials_num"
-                    android:layout_alignBottom="@id/lora_subband_f"
                     android:max="8" />
 
                 <TextView
@@ -451,10 +460,10 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/lora_subband_f"
                     android:layout_alignBottom="@id/lora_app_port_f"
-                    android:layout_toEndOf="@id/lora_nb_trials_f"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="10dp"
+                    android:layout_toEndOf="@id/lora_nb_trials_f"
                     android:gravity="center"
                     android:text="@string/lora_dr_0"
                     android:textAlignment="center" />
@@ -504,26 +513,6 @@
                     android:layout_toEndOf="@id/lora_nb_trials_num"
                     android:max="11" />
 
-                <TextView
-                    android:id="@+id/lora_send_repeat_f"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/lora_nb_trials_f"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:gravity="center_vertical"
-                    android:text="@string/tx_repeat"
-                    android:layout_alignBottom="@id/lora_send_repeat" />
-
-                <NumberPicker
-                    android:id="@+id/lora_send_repeat"
-                    android:layout_width="wrap_content"
-                    android:layout_height="150dp"
-                    android:layout_below="@id/lora_nb_trials_f"
-                    android:layout_alignStart="@id/lora_nb_trials"
-                    android:layout_marginStart="30dp" />
-
             </RelativeLayout>
 
         </ScrollView>
@@ -532,10 +521,10 @@
             android:id="@+id/lora_lorap2p"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/buttons"
+            android:layout_below="@+id/lora_send_repeat"
             android:layout_alignParentStart="true"
-            android:visibility="gone"
-            android:layout_margin="5dp">
+            android:layout_margin="5dp"
+            android:visibility="gone">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -579,31 +568,21 @@
                     android:text="@string/p2p_frequency"
                     tools:ignore="RelativeOverlap" />
 
-<!--                <EditText-->
-<!--                    android:id="@+id/lora_p2p_freq"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_alignStart="@id/bw_sel"-->
-<!--                    android:layout_alignParentEnd="true"-->
-<!--                    android:digits="0123456789ABCDEF"-->
-<!--                    android:inputType="number"-->
-<!--                    android:maxLength="16" />-->
-
                 <NumberPicker
                     android:id="@+id/lora_p2p_freq4"
                     android:layout_width="wrap_content"
                     android:layout_height="150dp"
                     android:layout_below="@+id/freq_sel"
-                    android:layout_toStartOf="@id/lora_p2p_freq7"
-                    android:layout_marginEnd="30dp" />
+                    android:layout_marginEnd="30dp"
+                    android:layout_toStartOf="@id/lora_p2p_freq7" />
 
                 <NumberPicker
                     android:id="@+id/lora_p2p_freq7"
                     android:layout_width="wrap_content"
                     android:layout_height="150dp"
                     android:layout_below="@+id/freq_sel"
-                    android:layout_toStartOf="@id/lora_p2p_freq9"
-                    android:layout_marginEnd="30dp" />
+                    android:layout_marginEnd="30dp"
+                    android:layout_toStartOf="@id/lora_p2p_freq9" />
 
                 <NumberPicker
                     android:id="@+id/lora_p2p_freq9"
@@ -628,8 +607,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tv_freq"
-                    android:layout_marginTop="5dp"
                     android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
                     android:layout_marginEnd="10dp"
                     android:layout_toEndOf="@id/sf_sel_txt"
                     android:gravity="center"
@@ -641,9 +620,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tv_freq"
-                    android:layout_toEndOf="@id/tv_pwr_num"
                     android:layout_alignBottom="@id/tv_pwr"
                     android:layout_alignParentEnd="true"
+                    android:layout_toEndOf="@id/tv_pwr_num"
                     android:max="22" />
 
                 <TextView
@@ -714,9 +693,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/bw_sel"
-                    android:layout_toEndOf="@id/tv_pwr_num"
                     android:layout_alignBottom="@id/sf_sel_txt"
                     android:layout_alignParentEnd="true"
+                    android:layout_toEndOf="@id/tv_pwr_num"
                     android:max="5" />
 
                 <TextView
@@ -732,9 +711,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/sf_sel_txt"
-                    android:layout_toEndOf="@id/tv_pwr_num"
                     android:layout_alignBottom="@id/cr_sel"
                     android:layout_alignParentEnd="true"
+                    android:layout_toEndOf="@id/tv_pwr_num"
                     android:orientation="horizontal">
 
                     <RadioButton
@@ -797,9 +776,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/cr_sel"
-                    android:layout_toEndOf="@id/tv_pwr_num"
                     android:layout_alignBottom="@id/tv_prelen"
                     android:layout_alignParentEnd="true"
+                    android:layout_toEndOf="@id/tv_pwr_num"
                     android:max="15" />
 
                 <TextView

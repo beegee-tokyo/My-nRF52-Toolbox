@@ -204,7 +204,7 @@ class DeviceListAdapter extends BaseAdapter {
 		return view;
 	}
 
-	private class ViewHolder {
+	private static class ViewHolder {
 		private TextView name;
 		private TextView address;
 		private ImageView rssi;
