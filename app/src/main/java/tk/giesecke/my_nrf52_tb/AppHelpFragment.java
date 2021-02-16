@@ -30,6 +30,7 @@ import androidx.appcompat.app.AlertDialog;
 
 public class AppHelpFragment extends DialogFragment {
 	private static final String ARG_TEXT = "ARG_TEXT";
+	private static final String ARG_TEXT_STRING = "ARG_STRING";
 	private static final String ARG_VERSION = "ARG_VERSION";
 
 	public static AppHelpFragment getInstance(final int aboutResId, final boolean appendVersion) {
@@ -54,11 +55,28 @@ public class AppHelpFragment extends DialogFragment {
 		return fragment;
 	}
 
+	public static AppHelpFragment getInstance(final String aboutText) {
+		final AppHelpFragment fragment = new AppHelpFragment();
+
+		final Bundle args = new Bundle();
+		args.putString(ARG_TEXT_STRING, aboutText);
+		args.putBoolean(ARG_VERSION, false);
+		fragment.setArguments(args);
+
+		return fragment;
+	}
+
 	@Override
     @NonNull
 	public Dialog onCreateDialog(final Bundle savedInstanceState) {
 		final Bundle args = requireArguments();
-		final StringBuilder text = new StringBuilder(getString(args.getInt(ARG_TEXT)));
+		StringBuilder text = new StringBuilder("");
+		if (args.containsKey(ARG_TEXT)) {
+			text.append(getString(args.getInt(ARG_TEXT)));
+		}
+		if (args.containsKey(ARG_TEXT_STRING)) {
+			text.append(args.getString(ARG_TEXT_STRING));
+		}
 
 		final boolean appendVersion = args.getBoolean(ARG_VERSION);
 		if (appendVersion) {

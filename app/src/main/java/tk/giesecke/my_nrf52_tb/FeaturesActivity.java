@@ -83,6 +83,11 @@ public class FeaturesActivity extends AppCompatActivity {
 		if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CHANGE_WIFI_STATE) != PackageManager.PERMISSION_GRANTED) {
 			arrPerm.add(Manifest.permission.CHANGE_WIFI_STATE);
 		}
+		// On newer Android versions it is required to get the permission of the user to
+		// access the camera.
+		if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+			arrPerm.add(Manifest.permission.CAMERA);
+		}
 		if (!arrPerm.isEmpty()) {
 			AlertDialog alertDialog1 = new AlertDialog.Builder(FeaturesActivity.this).create();
 
@@ -127,9 +132,14 @@ public class FeaturesActivity extends AppCompatActivity {
 	@Override
 	public boolean onOptionsItemSelected(@NonNull final MenuItem item) {
 
-		if (item.getItemId() == R.id.action_about) {
+		int itemId = item.getItemId();
+
+		if (itemId == R.id.action_about) {
 			final AppHelpFragment fragment = AppHelpFragment.getInstance(R.string.about_text, true);
 			fragment.show(getSupportFragmentManager(), null);
+		} else { //if (itemId == R.id.home) {
+			this.finishAffinity();
+//			onBackPressed();
 		}
 		return true;
 	}

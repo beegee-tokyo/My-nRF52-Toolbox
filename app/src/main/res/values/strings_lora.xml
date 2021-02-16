@@ -2,8 +2,10 @@
 <resources xmlns:tools="http://schemas.android.com/tools"
     tools:ignore="TypographyDashes">
     <string name="lora_feature_title">LPWAN setup</string>
-    <string name="lora_about_text">Setup LoRa/LPWAN devices with their credentials and parameters.\nA prepared settings file in JSON format can be loaded from the device on the path \"\\Internal storage\\Android\\data\\tk.giesecke.my_nrf52_tb\\files\\lora_config.txt\"</string>
-
+    <string name="lora_about_text">Setup LoRa/LPWAN devices with their credentials and parameters."</string>
+    <string name="lora_help_text">A prepared settings file in JSON format can be saved on device in the path \"\\Internal storage\\Android\\data\\tk.giesecke.my_nrf52_tb\\files\\lora_config.txt\. It can be read in as default with Menu > Read Cfg File"</string>
+    <string name="lora_help1_text">Menu > Safe Cfg File saves the current settings into a settings file in JSON format in the path \"\\Internal storage\\Android\\data\\tk.giesecke.my_nrf52_tb\\files\\lora_config.txt\ It can be read in as default with Menu > Read Cfg File" </string>
+    <string name="lora_help2_text">Saving a Cfg File saves the settings as well in the application preferences. The preferences can be loaded with Menu > Get Preferences</string>
     <string name="lora_write_button">Send config</string>
     <string name="lora_read_button">Get config</string>
     <string name="lora_erase_button">Erase config</string>

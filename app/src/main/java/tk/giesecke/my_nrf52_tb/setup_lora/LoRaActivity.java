@@ -186,9 +186,7 @@ public class LoRaActivity extends BleProfileServiceReadyActivity<LoRaService.Tem
         setGUI();
 
         appFileStorage = this.getExternalFilesDir(null);
-        Log.d(TAG, "Apps file directory is " + appFileStorage.getAbsolutePath());
-        Log.d(TAG, "Apps file directory is " + appFileStorage.getPath());
-    }
+     }
 
     private void setGUI() {
         int currentOrientation = getResources().getConfiguration().orientation;
@@ -364,7 +362,7 @@ public class LoRaActivity extends BleProfileServiceReadyActivity<LoRaService.Tem
         lora_send_repeat.setMinValue(0);
         lora_send_repeat.setMaxValue(24);
         lora_send_repeat.setDisplayedValues(repeatValues);
-        lora_send_repeat.setOnValueChangedListener((numberPicker, i, i1) -> sendRepeatTime = Integer.parseInt(repeatValues[i]) * 1000);
+        lora_send_repeat.setOnValueChangedListener((numberPicker, i, i1) -> sendRepeatTime = Integer.parseInt(repeatValues[i1]) * 1000);
 
         int idx = 0;
         for (int start = 433100; start <= 433500; start += 100) {
@@ -399,15 +397,15 @@ public class LoRaActivity extends BleProfileServiceReadyActivity<LoRaService.Tem
         lora_p2p_freq4.setMinValue(0);
         lora_p2p_freq4.setMaxValue(195);
         lora_p2p_freq4.setDisplayedValues(freq400Val);
-        lora_p2p_freq4.setOnValueChangedListener((numberPicker, i, i1) -> p2pFrequency = Integer.parseInt(freq400Val[i]) * 1000);
+        lora_p2p_freq4.setOnValueChangedListener((numberPicker, i, i1) -> p2pFrequency = Integer.parseInt(freq400Val[i1]) * 1000);
         lora_p2p_freq7.setMinValue(0);
         lora_p2p_freq7.setMaxValue(115);
         lora_p2p_freq7.setDisplayedValues(freq700Val);
-        lora_p2p_freq7.setOnValueChangedListener((numberPicker, i, i1) -> p2pFrequency = Integer.parseInt(freq700Val[i]) * 1000);
+        lora_p2p_freq7.setOnValueChangedListener((numberPicker, i, i1) -> p2pFrequency = Integer.parseInt(freq700Val[i1]) * 1000);
         lora_p2p_freq9.setMinValue(0);
         lora_p2p_freq9.setMaxValue(260);
         lora_p2p_freq9.setDisplayedValues(freq900Val);
-        lora_p2p_freq9.setOnValueChangedListener((numberPicker, i, i1) -> p2pFrequency = Integer.parseInt(freq900Val[i]) * 1000);
+        lora_p2p_freq9.setOnValueChangedListener((numberPicker, i, i1) -> p2pFrequency = Integer.parseInt(freq900Val[i1]) * 1000);
 
         lora_p2p_freq4_sel = findViewById(R.id.lora_p2p_freq4_sel);
         lora_p2p_freq7_sel = findViewById(R.id.lora_p2p_freq7_sel);
@@ -641,11 +639,6 @@ public class LoRaActivity extends BleProfileServiceReadyActivity<LoRaService.Tem
     public boolean onCreateOptionsMenu(final Menu menu) {
         getMenuInflater().inflate(R.menu.lora_menu, menu);
         thisMenu = menu;
-        SharedPreferences checkPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        Map<String, ?> allEntries = checkPreferences.getAll();
-        for (Map.Entry<String, ?> entry : allEntries.entrySet()) {
-            Log.d(TAG, entry.getKey() + ": " + entry.getValue().toString());
-        }
         return true;
     }
 
@@ -654,7 +647,11 @@ public class LoRaActivity extends BleProfileServiceReadyActivity<LoRaService.Tem
         if (item.getItemId() == android.R.id.home) {
             onBackPressed();
         } else if (item.getItemId() == R.id.action_about) {
-            final AppHelpFragment fragment = AppHelpFragment.getInstance(R.string.lora_about_text);
+            String aboutText = getString(R.string.lora_about_text) +
+                    "\n\n" + getString(R.string.lora_help_text) +
+                    "\n\n" + getString(R.string.lora_help1_text) +
+                    "\n\n" + getString(R.string.lora_help2_text);
+            final AppHelpFragment fragment = AppHelpFragment.getInstance(aboutText);
             fragment.show(getSupportFragmentManager(), "help_fragment");
         } else if (item.getItemId() == R.id.connect) {
             onMenuConnectClicked();
@@ -672,19 +669,7 @@ public class LoRaActivity extends BleProfileServiceReadyActivity<LoRaService.Tem
                 reportSettingsMismatch(getString(R.string.lora_save_config_fail));
             }
         } else if (item.getItemId() == R.id.get) {
-            SharedPreferences checkPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-            Map<String, ?> allEntries = checkPreferences.getAll();
-            for (Map.Entry<String, ?> entry : allEntries.entrySet()) {
-                Log.d(TAG, entry.getKey() + ": " + entry.getValue().toString());
-            }
-
             getPreferences();
-            checkPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-            allEntries = checkPreferences.getAll();
-            for (Map.Entry<String, ?> entry : allEntries.entrySet()) {
-                Log.d(TAG, entry.getKey() + ": " + entry.getValue().toString());
-            }
-
             updateUI();
         }
         return true;
