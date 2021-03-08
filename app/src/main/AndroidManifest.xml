@@ -106,7 +106,7 @@
 			android:label="@string/esp32_feature_title" />
 
 		<activity
-			android:name="tk.giesecke.my_nrf52_tb.setup_lora.LoRaActivity"
+			android:name="tk.giesecke.my_nrf52_tb.setup_lorawan.LoRaActivity"
 			android:icon="@drawable/ic_lora_feature"
 			android:label="@string/lora_feature_title" >
 			<intent-filter>
@@ -116,7 +116,7 @@
 			</intent-filter>
 		</activity>
 		<service
-			android:name="tk.giesecke.my_nrf52_tb.setup_lora.LoRaService"
+			android:name="tk.giesecke.my_nrf52_tb.setup_lorawan.LoRaService"
 			android:label="@string/lora_feature_title" />
 
 		<!-- Plug-in activities -->
