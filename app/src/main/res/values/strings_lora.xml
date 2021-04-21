@@ -11,10 +11,10 @@
     <string name="lora_p2p_help_text">A prepared settings file in JSON format can be saved on device in the path \"\\Internal storage\\Android\\data\\tk.giesecke.my_nrf52_tb\\files\\lora_p2p_config.txt\. It can be read in as default with Menu > Read Cfg File"</string>
     <string name="lora_p2p_help1_text">Menu > Safe Cfg File saves the current settings into a settings file in JSON format in the path \"\\Internal storage\\Android\\data\\tk.giesecke.my_nrf52_tb\\files\\lora_p2p_config.txt\ It can be read in as default with Menu > Read Cfg File" </string>
     <string name="lora_p2p_help2_text">Saving a Cfg File saves the settings as well in the application preferences. The preferences can be loaded with Menu > Get Preferences</string>
-    <string name="lora_write_button">Send config</string>
-    <string name="lora_read_button">Get config</string>
+    <string name="lora_write_button">Send</string>
+    <string name="lora_read_button">Read</string>
     <string name="lora_erase_button">Erase config</string>
-    <string name="lora_reset_button">Reset node</string>
+    <string name="lora_reset_button">Restart</string>
     <string name="lora_qr_button">QR</string>
     <string name="lora_load_config">Read Cfg File</string>
     <string name="lora_save_config">Save Cfg File</string>
@@ -65,6 +65,17 @@
     <string name="lora_dr_13">13</string>
     <string name="lora_dr_14">14</string>
     <string name="lora_dr_15">15</string>
+    <string name="lora_region">Region</string>
+    <string name="reg_as923">AS923</string>
+    <string name="reg_au915">AU915</string>
+    <string name="reg_cn470">CN470</string>
+    <string name="reg_cn779">CN779</string>
+    <string name="reg_eu433">EU433</string>
+    <string name="reg_eu868">EU868</string>
+    <string name="reg_kr920">KR920</string>
+    <string name="reg_in865">IN865</string>
+    <string name="reg_us915">US915</string>
+    <string name="reg_us915h">US915H</string>
 
     <string name="p2p_frequency">Frequency</string>
     <string name="p2p_bw">Bandwidth</string>

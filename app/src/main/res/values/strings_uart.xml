@@ -72,6 +72,7 @@
         text based communication that is often used for debugging and control. 
         \nEach configuration contains 10 programmable buttons that may send commands to the UART TX characteristic. Click on the Settings menu item to edit buttons actions.</string>
 
+    <string name="time_stamp">Show time stamp</string>
     <string name="bt0_name">B0</string>
     <string name="bt1_name">B1</string>
     <string name="bt2_name">B2</string>

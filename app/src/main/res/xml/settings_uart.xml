@@ -1,6 +1,12 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="date_stamp"
+        android:summary="@string/time_stamp"
+        app:iconSpaceReserved="false" />
+
     <PreferenceCategory
         android:title="@string/bt0_header"
         app:iconSpaceReserved="false">

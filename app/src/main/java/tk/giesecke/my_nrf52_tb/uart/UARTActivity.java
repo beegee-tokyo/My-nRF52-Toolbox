@@ -72,6 +72,7 @@ public class UARTActivity extends BleProfileServiceReadyActivity<UARTService.UAR
     private UARTService.UARTBinder mServiceBinder;
 
     private boolean userScroll = false;
+    public static boolean showDateStamp = true;
 
     public static String[] buttonNames;
     public static String[] buttonValues;
@@ -349,21 +350,38 @@ public class UARTActivity extends BleProfileServiceReadyActivity<UARTService.UAR
     }
 
     private final BroadcastReceiver mUartReceiver = new BroadcastReceiver() {
-        @SuppressLint("SimpleDateFormat")
+        @SuppressLint({"SimpleDateFormat", "DefaultLocale"})
         @Override
         public void onReceive(final Context context, final Intent intent) {
             final String action = intent.getAction();
 
             if (BROADCAST_UART_RX.equals(action)) {
+                Calendar currentTime = Calendar.getInstance();
                 TextView logOut = findViewById(R.id.rcvd_lines);
                 String rcvd = intent.getStringExtra(EXTRA_DATA);
+                if (rcvd.equalsIgnoreCase("\r\n")) {
+                    // Empty, skip it
+                    return;
+                }
                 StringBuilder rcvdRaw = new StringBuilder();
+                if (showDateStamp) {
+                    rcvdRaw.append(String.format("%02d", currentTime.get(Calendar.HOUR_OF_DAY)));
+                    rcvdRaw.append(":");
+                    rcvdRaw.append(String.format("%02d", currentTime.get(Calendar.MINUTE)));
+                    rcvdRaw.append(":");
+                    rcvdRaw.append(String.format("%02d", currentTime.get(Calendar.SECOND)));
+                    rcvdRaw.append("->");
+                }
                 boolean addNL = false;
                 if (rcvd != null) {
                     if (((rcvd.charAt(0) >= 32) && (rcvd.charAt(0) < 127))
                             || (rcvd.charAt(0) == 10)
                             || (rcvd.charAt(0) == 13)) {
-                        rcvd = intent.getStringExtra(EXTRA_DATA);
+                        rcvdRaw.append(intent.getStringExtra(EXTRA_DATA));
+                        rcvd = rcvdRaw.toString();
+                        if (!rcvd.endsWith("\n") && !rcvd.endsWith("\r")) {
+                            addNL = true;
+                        }
                     } else {
                         for (int idx = 0; idx < rcvd.length(); idx++) {
                             rcvdRaw.append(String.format("0x%02X", (byte) rcvd.charAt(idx)));
@@ -371,6 +389,10 @@ public class UARTActivity extends BleProfileServiceReadyActivity<UARTService.UAR
                         }
                         rcvd = rcvdRaw.toString();
                     }
+                }
+                if (rcvd.isEmpty() || rcvd.startsWith("\n") || rcvd.startsWith("\r")) {
+                    // Empty, skip it
+                    return;
                 }
                 logOut.append(rcvd);
                 if (addNL) {

@@ -149,6 +149,7 @@ public class LoRaActivity extends BleProfileServiceReadyActivity<LoRaService.Tem
     SeekBar lora_subband;
     SeekBar lora_app_port;
     SeekBar lora_nb_trials;
+    NumberPicker lora_region;
     NumberPicker lora_send_repeat;
 
     RadioButton lora_p2p_freq4_sel;
@@ -170,7 +171,8 @@ public class LoRaActivity extends BleProfileServiceReadyActivity<LoRaService.Tem
     SeekBar lora_p2p_pre_len;
     EditText lora_p2p_sym_timeout;
 
-    final String[] repeatValues = {"10", "20", "30", "40", "50", "60", "90", "120", "240", "360", "480", "600", "720", "840", "960", "1080", "1200", "1500", "1800", "2100", "2400", "2700", "3000", "3300", "3600"};
+    final String[] repeatValues = {"0", "10", "20", "30", "40", "50", "60", "90", "120", "240", "360", "480", "600", "720", "840", "960", "1080", "1200", "1500", "1800", "2100", "2400", "2700", "3000", "3300", "3600"};
+    final String[] regionValues = {"AS923","AU915","CN470","CN779","EU433","EU868","KR920","IN865","US915","AS923-2","AS923-3","AS923-4"};
     final String[] freq400Val = new String[196];
     final String[] freq700Val = new String[116];
     final String[] freq900Val = new String[261];
@@ -359,9 +361,15 @@ public class LoRaActivity extends BleProfileServiceReadyActivity<LoRaService.Tem
                     }
                 }
         );
+        lora_region = findViewById(R.id.lora_region);
+        lora_region.setMinValue(0);
+        lora_region.setMaxValue(11);
+        lora_region.setDisplayedValues(regionValues);
+        lora_region.setOnValueChangedListener((numberPicker, i, i1) -> region = (byte) i1);
+
         lora_send_repeat = findViewById(R.id.lora_send_repeat);
         lora_send_repeat.setMinValue(0);
-        lora_send_repeat.setMaxValue(24);
+        lora_send_repeat.setMaxValue(25);
         lora_send_repeat.setDisplayedValues(repeatValues);
         lora_send_repeat.setOnValueChangedListener((numberPicker, i, i1) -> sendRepeatTime = Integer.parseInt(repeatValues[i1]) * 1000);
 
@@ -559,6 +567,7 @@ public class LoRaActivity extends BleProfileServiceReadyActivity<LoRaService.Tem
                 break;
             }
         }
+        lora_region.setValue(region);
         lora_nb_trials.setProgress(nbTrials - 1);
         lora_tx_pwr.setProgress(txPower);
         lora_datarate.setProgress(dataRate);
@@ -779,6 +788,7 @@ public class LoRaActivity extends BleProfileServiceReadyActivity<LoRaService.Tem
         adrEna = preferences.getBoolean("adr_ena", true);
         confirmedEna = preferences.getBoolean("conf_ena", true);
         dataRate = (byte) preferences.getInt("dr_min", 0);
+        region = (byte) preferences.getInt("region", 10);
         txPower = (byte) preferences.getInt("tx_power", 0);
         loraClass = (byte) preferences.getInt("lora_class", 0);
         subBandChannel = (byte) preferences.getInt("sub_chan", 0);
@@ -807,6 +817,7 @@ public class LoRaActivity extends BleProfileServiceReadyActivity<LoRaService.Tem
         preferences.putBoolean("adr_ena", adrEna);
         preferences.putBoolean("conf_ena", confirmedEna);
         preferences.putInt("dr_min", dataRate);
+        preferences.putInt("region", region);
         preferences.putInt("tx_power", txPower);
         preferences.putInt("lora_class", loraClass);
         preferences.putInt("sub_chan", subBandChannel);
@@ -1358,7 +1369,7 @@ public class LoRaActivity extends BleProfileServiceReadyActivity<LoRaService.Tem
         confirmedEna = lora_conf_msg.isChecked();
         newSettings[87] = confirmedEna ? (byte) 1 : (byte) 0;
 
-        newSettings[88] = 1;
+        newSettings[88] = region;
 
         loraWanEna = lora_mode.isChecked();
         newSettings[89] = loraWanEna ? (byte) 1 : (byte) 0;
@@ -1578,7 +1589,7 @@ public class LoRaActivity extends BleProfileServiceReadyActivity<LoRaService.Tem
         newSettings[85] = confirmedEna ? (byte) 1 : (byte) 0;
 
         newSettings[86] = reqReset ? (byte) 1 : (byte) 0;
-        newSettings[87] = 0;
+        newSettings[87] = region;
         return newSettings;
     }
 

@@ -8,6 +8,7 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.preference.CheckBoxPreference;
 import androidx.preference.EditTextPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
@@ -15,6 +16,7 @@ import androidx.preference.PreferenceGroup;
 import androidx.appcompat.widget.Toolbar;
 
 import tk.giesecke.my_nrf52_tb.R;
+import tk.giesecke.my_nrf52_tb.uart.UARTActivity;
 
 import static tk.giesecke.my_nrf52_tb.uart.UARTActivity.buttonNames;
 import static tk.giesecke.my_nrf52_tb.uart.UARTActivity.buttonValues;
@@ -78,6 +80,15 @@ public class SettingsActivity extends AppCompatActivity {
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             setPreferencesFromResource(R.xml.settings_uart, rootKey);
+
+            CheckBoxPreference dateStamp = findPreference("date_stamp");
+            assert dateStamp != null;
+            dateStamp.setOnPreferenceChangeListener((preference, newValue) -> {
+                CheckBoxPreference checkboxPreference = (CheckBoxPreference) preference;
+                // Status is changing and isChecked gives last status
+                UARTActivity.showDateStamp = !checkboxPreference.isChecked();
+                return true;
+            });
 
             EditTextPreference bt0Name = findPreference("bt0_name_value");
             assert bt0Name != null;

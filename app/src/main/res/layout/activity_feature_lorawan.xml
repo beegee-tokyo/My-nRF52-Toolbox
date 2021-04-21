@@ -39,26 +39,93 @@
             android:gravity="center"
             android:text="@string/scanner_default_name" />
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/lora_readBT"
+            style="@style/Widget.MyButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="1dp"
+            android:layout_marginStart="30dp"
+            android:layout_alignParentStart="true"
+            android:layout_toStartOf="@+id/lora_resetBT"
+            android:enabled="false"
+            android:onClick="onClickLoRaRead"
+            android:text="@string/lora_read_button"
+            android:textColor="@android:color/holo_blue_dark"
+            android:textStyle="bold" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/lora_writeBT"
+            style="@style/Widget.MyButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_toEndOf="@+id/lora_resetBT"
+            android:layout_margin="1dp"
+            android:enabled="false"
+            android:onClick="onClickLoRaWrite"
+            android:text="@string/lora_write_button"
+            android:textColor="@android:color/holo_green_dark"
+            android:textStyle="bold" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/lora_resetBT"
+            style="@style/Widget.MyButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="1dp"
+            android:enabled="false"
+            android:onClick="onClickLoRaReset"
+            android:text="@string/lora_reset_button"
+            android:textColor="@android:color/holo_orange_dark"
+            android:textStyle="bold" />
+
         <CheckBox
             android:id="@+id/lora_mode"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/lora_readBT"
+            android:layout_marginStart="15dp"
             android:text="@string/lora_mode" />
 
         <CheckBox
             android:id="@+id/lora_join"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/lora_mode"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@id/lora_readBT"
+            android:layout_marginEnd="15dp"
             android:text="@string/join_ena" />
+
+        <TextView
+            android:id="@+id/lora_region_f"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/lora_join"
+            android:layout_alignBottom="@id/lora_send_repeat"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:gravity="center_vertical"
+            android:text="@string/lora_region" />
+
+        <NumberPicker
+            android:id="@+id/lora_region"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:layout_below="@id/lora_join"
+            android:layout_toEndOf="@id/lora_region_f"
+            android:layout_toStartOf="@id/center"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp" />
 
         <TextView
             android:id="@+id/lora_send_repeat_f"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
             android:layout_below="@id/lora_join"
             android:layout_alignBottom="@id/lora_send_repeat"
-            android:layout_alignParentStart="true"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:gravity="center_vertical"
@@ -69,54 +136,10 @@
             android:layout_width="wrap_content"
             android:layout_height="100dp"
             android:layout_below="@id/lora_join"
-            android:layout_toEndOf="@id/lora_send_repeat_f"
+            android:layout_toEndOf="@id/center"
+            android:layout_toStartOf="@id/lora_send_repeat_f"
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/lora_readBT"
-            style="@style/Widget.MyButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@id/center"
-            android:layout_margin="1dp"
-            android:layout_marginStart="30dp"
-            android:layout_weight="1"
-            android:enabled="false"
-            android:onClick="onClickLoRaRead"
-            android:text="@string/lora_read_button"
-            android:textColor="@android:color/holo_blue_dark"
-            android:textStyle="bold" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/lora_writeBT"
-            style="@style/Widget.MyButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@id/center"
-            android:layout_below="@id/lora_readBT"
-            android:layout_margin="1dp"
-            android:layout_weight="1"
-            android:enabled="false"
-            android:onClick="onClickLoRaWrite"
-            android:text="@string/lora_write_button"
-            android:textColor="@android:color/holo_green_dark"
-            android:textStyle="bold" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/lora_resetBT"
-            style="@style/Widget.MyButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@id/center"
-            android:layout_below="@id/lora_writeBT"
-            android:layout_margin="1dp"
-            android:layout_weight="1"
-            android:enabled="false"
-            android:onClick="onClickLoRaReset"
-            android:text="@string/lora_reset_button"
-            android:textColor="@android:color/holo_orange_dark"
-            android:textStyle="bold" />
 
         <ScrollView
             android:id="@+id/lora_lorawan"

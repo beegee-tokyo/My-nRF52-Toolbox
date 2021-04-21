@@ -255,7 +255,7 @@ public class LoRaManager extends BatteryManager<LoRaManagerCallbacks> {
 
         value = String.format("%02X%02X%02X%02X",
                 deviceData[7], deviceData[6], deviceData[5], deviceData[4]);
-        if (((Long.parseLong(value, 16)) > 3600000) || ((Long.parseLong(value, 16)) < 10000)) {
+        if (((Long.parseLong(value, 16)) > 3600000) || ((Long.parseLong(value, 16)) < 0)) {
             LoRaActivity.sendRepeatTime = 120000;
         } else {
             LoRaActivity.sendRepeatTime = Long.parseLong(value, 16);
@@ -347,7 +347,7 @@ public class LoRaManager extends BatteryManager<LoRaManagerCallbacks> {
 
         String value = String.format("%02X%02X%02X%02X",
                 deviceData[75], deviceData[74], deviceData[73], deviceData[72]);
-        if (((Long.parseLong(value, 16)) > 3600000) || ((Long.parseLong(value, 16)) < 10000)) {
+        if (((Long.parseLong(value, 16)) > 3600000) || ((Long.parseLong(value, 16)) < 0)) {
             LoRaActivity.sendRepeatTime = 120000;
         } else {
             LoRaActivity.sendRepeatTime = Long.parseLong(value, 16);
@@ -407,6 +407,12 @@ public class LoRaManager extends BatteryManager<LoRaManagerCallbacks> {
             LoRaActivity.confirmedEna = (deviceData[85] == 1);
         }
 
+        if (abs(deviceData[87]) > 11) {
+            LoRaActivity.region = 10;
+        } else {
+            LoRaActivity.region = (byte) abs(deviceData[87]);
+        }
+
         LoRaActivity.loraWanEna = true;
         singleDataSet = true;
         final Intent broadcast = new Intent(LoRaService.BROADCAST_DATA_RECVD);
@@ -463,7 +469,7 @@ public class LoRaManager extends BatteryManager<LoRaManagerCallbacks> {
 
         String value = String.format("%02X%02X%02X%02X",
                 deviceData[79], deviceData[78], deviceData[77], deviceData[76]);
-        if (((Long.parseLong(value, 16)) > 3600000) || ((Long.parseLong(value, 16)) < 10000)) {
+        if (((Long.parseLong(value, 16)) > 3600000) || ((Long.parseLong(value, 16)) < 0)) {
             LoRaActivity.sendRepeatTime = 120000;
         } else {
             LoRaActivity.sendRepeatTime = Long.parseLong(value, 16);
@@ -512,8 +518,8 @@ public class LoRaManager extends BatteryManager<LoRaManagerCallbacks> {
             LoRaActivity.confirmedEna = (deviceData[87] == 1);
         }
 
-        if (abs(deviceData[88]) > 9) {
-            LoRaActivity.region = 4;
+        if (abs(deviceData[88]) > 11) {
+            LoRaActivity.region = 10;
         } else {
             LoRaActivity.region = (byte) abs(deviceData[88]);
         }
